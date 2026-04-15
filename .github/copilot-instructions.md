@@ -27,3 +27,5 @@ This repository is a hands-on workshop for GitHub Copilot customization.
 - Assume attendees are familiar with coding and IDE usage, but when there is any ambiguity, be explicit.
 - When proposing tasks, include at least one validation step (tests, run output, or behavior check).
 - Avoid changing unrelated files.
+- For commands that modify an existing file (prompts, skills, agents), ask participants to open the target file in the editor first, then run the command in chat. This allows them to see changes directly in the editor.
+
