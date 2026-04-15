@@ -15,9 +15,9 @@ This repository is a hands-on workshop for GitHub Copilot customization.
 - Python: data processing and legacy API.
 
 ## Track READMEs
-- JavaScript track guide: `exercises/javascript/README.md`
-- TypeScript track guide: `exercises/typescript/README.md`
-- Python track guide: `exercises/python/README.md`
+- JavaScript track guide: [exercises/javascript/README.md](exercises/javascript/README.md)
+- TypeScript track guide: [exercises/typescript/README.md](exercises/typescript/README.md)
+- Python track guide: [exercises/python/README.md](exercises/python/README.md)
 
 ## Guidance for AI Assistance
 - Keep suggestions aligned to the selected language track unless asked otherwise.
@@ -28,4 +28,5 @@ This repository is a hands-on workshop for GitHub Copilot customization.
 - When proposing tasks, include at least one validation step (tests, run output, or behavior check).
 - Avoid changing unrelated files.
 - For commands that modify an existing file (prompts, skills, agents), ask participants to open the target file in the editor first, then run the command in chat. This allows them to see changes directly in the editor.
+- When referencing an existing file or a file that AI creates, use a clickable Markdown link in prose instructions. Keep plain file paths only inside quoted prompts or commands when users are expected to copy them verbatim.
 

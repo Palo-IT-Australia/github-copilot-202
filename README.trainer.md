@@ -18,3 +18,5 @@ This guide is for workshop trainers to quickly orient and facilitate sessions.
 1. Ask participants to choose one track based on language comfort.
 2. Run exercises in sequence: instructions -> prompts -> skills -> agents -> hooks.
 3. Validate each step with a runnable check (tests or command output).
+
+Remind participants that whenever they send a Copilot Chat prompt or slash command, they should observe the AI reasoning and wait for it to finish before moving on.
