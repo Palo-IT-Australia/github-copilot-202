@@ -31,9 +31,9 @@ npm start
 Successful output means:
 - Output shows `=== Cart Demo ===`
 - Output shows an `Items:` section listing products with quantities and prices
-- Output shows `--- Without coupon ---` with a `total` value
-- Output shows `--- With 10% coupon ---` with a lower `total` than without coupon
-- Output shows `--- With $20 fixed coupon ---` with a `total` that is `$20` less than the no-coupon total (before tax)
+- Output shows `--- Without coupon ---` with `total: 242.55,` value
+- Output shows `--- With 10% coupon ---` with  `total: 218.3` 
+- Output shows `--- With $20 fixed coupon ---` with `total: 220.55` 
 
 ## Verify Result
 
@@ -44,11 +44,11 @@ npm test
 
 Successful verification means:
 - Output includes `PASS` next to the test file name
-- Output includes a `Test Suites:` line with `passed`
-- Output includes a `Tests:` line with `passed`
+- Output includes a `Test Suites:` line with `1 passed`
+- Output includes a `Tests:` line with `4 passed`
 
 ## Concept Examples (Simple And Verifiable)
-When a step asks you to send a Copilot Chat prompt or slash command, observe the AI reasoning in Chat and wait for it to finish before you continue.
+When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
 
 ### 1. Instructions
 Goal: make Copilot follow JavaScript rules for this track.
@@ -56,23 +56,40 @@ Goal: make Copilot follow JavaScript rules for this track.
 Create:
 - In Copilot Chat, type this command:
 ```text
-/create-instructions JavaScript cart rules: prefer const, avoid mutating input arguments, and require input validation for quantity and price, Quantity and price can never be 0 or less. 
+/create-instructions JavaScript rules: prefer const, avoid mutating input arguments, and require input validation for quantity and price.
+                     Quantity and price can never be 0 or less. 
+                     Only apply this to JavaScript files
                      Name it `js-cart-rules`
 ```
 - Press Enter.
 - Open [`.github/instructions/js-cart-rules.instructions.md`](../../.github/instructions/js-cart-rules.instructions.md) and review the content.
+- Note that it only applies to JavaScript files via `applyTo: "**/*.js"` (only visible in the editor, not Markdown preview)
 
 Execute:
 - Open [exercises/javascript/cart.js](cart.js) in the editor.
-- Ask Copilot: "In `exercises/javascript/cart.js`, review the code and check for missing validations in `addItem`."
+- In Copilot Chat, type this command:
+```text
+In `exercises/javascript/cart.js`, review the code and check for missing validations in `addItem`
+```
 
 Verify:
 - Review the code changes in [exercises/javascript/cart.js](cart.js). Note that checks were added for price and quantity <= 0 without this being explicitly stated in the prompt 
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor.
-- Ask Copilot: "In `exercises/javascript/cart.test.js`, add or update a test that tests the `addItem` validation rules"
+- In Copilot Chat, type this command:
+```text
+In `exercises/javascript/cart.test.js`, add or update a test that tests the `addItem` validation rules
+```
 - Review and accept the test change. Note that tests were added for price and quantity <= 0 without this being explicitly stated in the prompt
 - Run `npm test` and confirm that the new tests pass.
-- Ask Copilot "Explain which lines were changed in the test file and how the new test proves the behavior."
+- Verify that the number of tests has increased
+- In Copilot Chat, type this command:
+```text
+Explain which lines were changed in the test file and how the new test proves the behavior
+```
+- Review the explanation
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 2. Prompts
 Goal: create a reusable test-generation prompt.
@@ -88,7 +105,11 @@ Create:
 
 Execute:
 - Open [exercises/javascript/cart.js](cart.js) in the editor and select the full `removeItem` function.
-- With the function selected, open Copilot Chat, type `/js-generate-function-tests`, and press Enter.
+- With the function selected, in Copilot Chat, type this command:
+```text
+/js-generate-function-tests
+```
+- Press Enter.
 
 Verify:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it contains at least one new test that calls `removeItem` and checks the expected cart behavior after removal.
@@ -96,6 +117,9 @@ Verify:
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
 - Note the newly added tests
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot 
 
 ### 3. Skill
 Goal: create a reusable review skill for checkout logic.
@@ -106,19 +130,26 @@ Create:
 /create-skill Skill to review shopping cart checkout logic for discount order, coupon handling, tax, and rounding mistakes. 
               Sort the output by pass and fail. 
 	          Suggest fixes for fails if they are short. 
-	          Format is nicely. 
+	          Format it nicely.
 	          Name it `js-checkout-review`
 ```
 - Press Enter.
 - Open [`.github/skills/js-checkout-review/SKILL.md`](../../.github/skills/js-checkout-review/SKILL.md) and review the content.
 
 Execute:
-- In Copilot Chat, type `/js-checkout-review exercises/javascript/cart.js` and press Enter.
+- In Copilot Chat, type this command:
+```text
+/js-checkout-review exercises/javascript/cart.js
+```
+- Press Enter
 
 Verify:
 - Confirm the skill output explicitly includes all four check labels: `discount order`, `coupon handling`, `tax`, and `rounding`.
 - Confirm it has one failure for rounding
 - Review the result recommendation
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot 
 
 ### 4. Agents
 Goal: use a custom agent to add missing tests, run them, and update source code if it needs to fix a failure.
@@ -127,55 +158,70 @@ Create:
 - In Copilot Chat, type this command:
 ```text
 /create-agent Agent that writes missing Jest tests for a selected JS file
-			  Test are run automatically with verification of result
-			  If a test fails update the related source code to fix it. Confirm the fix works
+			  Tests are run automatically with verification of result
+			  If a test fails, update the related source code to fix it. Confirm the fix works
 			  Name it `js-test-fixer`
 ```
 - Press Enter.
 - Open [`.github/agents/js-test-fixer.agent.md`](../../.github/agents/js-test-fixer.agent.md) and review the content.
 
 Execute:
-- Open [exercises/javascript/cart.js](cart.js)
-- If you havent done so already accept all previous code changes (if any)
+- Open [exercises/javascript/cart.test.js](cart.test.js) in the editor
 - Open Copilot Chat.
 - In the agent selector (bottom of chat usually "Agent"), choose `js-test-fixer`
-- In Copilot Chat, ask: "check cart.js"
+- In Copilot Chat, type this command:
+```text
+check cart.js
+```
+- Press Enter
 
 Verify:
-- Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it was updated with at least one new test for behavior in [exercises/javascript/cart.js](cart.js).
-- Open [exercises/javascript/cart.js](cart.js) in the editor and confirm whether the agent also changed source code to fix a failing behavior.
+- Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it was updated with tests for behavior in [exercises/javascript/cart.js](cart.js).
+- Open [exercises/javascript/cart.js](cart.js) in the editor and confirm the agent also changed source code to fix the rounding error.
 - Run `npm test` and confirm output includes `PASS` next to the test file name.
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
 
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot 
+
 ### 5. Hooks
-Goal: automatically validate edits.
+Goal: automatically validate edits and check for missing function description/comments
 
 Create:
 - In Copilot Chat, type this command:
 ```text
-/create-hook Post-tool hook: after editing files in exercises/javascript, run npm test. 
-              Find workspace root dynamically by searching for .github folder. 
-              Verify exercises/javascript directory exists before running tests. 
-              Output user-visible messages via systemMessage (✅ pass, ❌ fail, ⚠️ warning). 
-              Handle Windows and Unix paths correctly. 
-              Name it `js-post-edit-tests`
+/create-hook Post-tool hook named js-missing-function-comments: 
+             after edits to JavaScript files only, scan the edited file and output only function names (and line numbers) that do not have an immediately preceding comment line (//...) or JSDoc block (/** ... */). 
+             Return results via systemMessage: ✅ if all functions are commented, ⚠️ with a plain list when missing comments exist, ❌ only on parse/read errors.
+             Do not modify files, do not run tests, keep it fast, and support Windows + Unix paths.
+             The hook CWD is always the repo root, so use simple relative paths in the JSON command (no shell wrapper needed).
+             VS Code edit tool names include: replace_string_in_file, multi_replace_string_in_file, apply_patch, create_file, insert_edit_into_file, vscode_renameSymbol. Allow all of these.
+             The stdin JSON payload from VS Code uses snake_case keys: tool_input (not toolInput), tool_name, hook_event_name, etc. Extract the file path from payload.tool_input.filePath.
+             Also check the TOOL_INPUT_FILE_PATH environment variable as a fallback when the file path cannot be extracted from the stdin JSON payload.
 ```
+
 - Press Enter.
-- Open [`.github/hooks/js-post-edit-tests.json`](../../.github/hooks/js-post-edit-tests.json) and review the content.
-- Open [`.github/hooks/scripts/js-post-edit-tests.js`](../../.github/hooks/scripts/js-post-edit-tests.js) and review the content.
+- Please note that the create-hook command is very explicit on what to create and how to deal with relative paths. This was done because we had previously had problems with hooks not firing.
+- Open [`.github/hooks/js-missing-function-comments.json`](../../.github/hooks/js-missing-function-comments.json) and review the content.
+- Open [`.github/hooks/scripts/js-missing-function-comments.js`](../../.github/hooks/scripts/js-missing-function-comments.js) and review the content.
 
 Execute:
-- Open [exercises/javascript/cart.js](cart.js) in the editor.
-- Ask Copilot: "In `exercises/javascript/cart.js`, make a tiny safe edit such as renaming a local variable only."
+- Open a new Chat window (important; otherwise the hook won't fire)
+- In Copilot Chat, type this command:
+```text
+In `exercises/javascript/cart.js`, make a tiny safe edit such as renaming a local variable only
+```
 
 Verify:
-- Confirm a test run starts automatically right after the edit (without manually running `npm test`).
-- Confirm the command runs in `exercises/javascript` and executes `npm test`.
-- Confirm output includes `PASS` next to the test file name.
-- Confirm output includes a `Test Suites:` line with `passed`.
-- Confirm output includes a `Tests:` line with `passed`.
+- Check the Chat output. 
+- Click on **... received a warning** message just above the last message
+- Click on **Warning from Post-Tool Use hook**
+- Note the output, which lists all functions that do not have comments.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ---
 
-Well done you completed all excercises
+Well done you completed all exercises

@@ -35,7 +35,8 @@ Successful output means:
 - Output shows list behavior including filtering and pagination details.
 
 ## Verify Result
-All OS:
+
+**Tests** — All OS:
 ```bash
 npm test
 ```
@@ -48,7 +49,7 @@ Successful verification means:
 
 ## Concept Examples (Simple And Verifiable)
 
-When a step asks you to send a Copilot Chat prompt or slash command, observe the AI reasoning in Chat and wait for it to finish before you continue.
+When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
 
 ### 1. Instructions
 Goal: enforce TypeScript service conventions.
@@ -64,7 +65,11 @@ Create:
 
 Execute:
 - Open [exercises/typescript/user-service.ts](user-service.ts) in the editor.
-- Ask Copilot: "In `exercises/typescript/user-service.ts`, improve error messages for not-found cases to include the user id."
+- In Copilot Chat, type this command:
+```text
+In `exercises/typescript/user-service.ts`, improve error messages for not-found cases to include the user id.
+```
+- Press Enter.
 
 Verify:
 - Run:
@@ -76,10 +81,17 @@ npm test
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
 - Open [exercises/typescript/user-service.test.ts](user-service.test.ts) in the editor.
-- Ask Copilot: "In `exercises/typescript/user-service.test.ts`, add or update a test that checks a not-found error includes the requested user id."
+- In Copilot Chat, type this command:
+```text
+In `exercises/typescript/user-service.test.ts`, add or update a test that checks a not-found error includes the requested user id.
+```
+- Press Enter.
 - Review and accept the test change.
 - Re-run `npm test` and confirm the command exits with code `0`, and output includes both `Test Suites:` with `passed` and `Tests:` with `passed`.
 - Do a source check in [exercises/typescript/user-service.ts](user-service.ts) to confirm not-found errors include the requested id.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 2. Prompts
 Goal: create a reusable test prompt for TS functions.
@@ -95,7 +107,11 @@ Create:
 
 Execute:
 - Open [exercises/typescript/user-service.ts](user-service.ts) in the editor and select the full `list` function.
-- With the function selected, open Copilot Chat, type `/ts-generate-function-tests`, and press Enter.
+- With the function selected, in Copilot Chat, type this command:
+```text
+/ts-generate-function-tests
+```
+- Press Enter.
 - Accept the generated test changes.
 
 Verify:
@@ -103,6 +119,9 @@ Verify:
 - Run `npm test` and confirm the command exits with code `0`.
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 3. Skill
 Goal: package a reusable TypeScript review workflow.
@@ -118,12 +137,19 @@ Create:
 
 Execute:
 - Open [exercises/typescript/user-service.ts](user-service.ts) in the editor.
-- In Copilot Chat, type `/ts-service-review exercises/typescript/user-service.ts` and press Enter.
+- In Copilot Chat, type this command:
+```text
+/ts-service-review exercises/typescript/user-service.ts
+```
+- Press Enter.
 
 Verify:
 - Confirm the output explicitly includes all three check labels: `type safety`, `duplicate logic`, and `missing test coverage`.
 - Confirm it names at least one code location in [exercises/typescript/user-service.ts](user-service.ts).
 - Confirm it includes either one concrete issue with a short fix suggestion, or the exact phrase `no issues found` with brief reasoning.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 4. Agents
 Goal: use a custom agent to add missing tests, run them, and update source code if it needs to fix a failure.
@@ -142,8 +168,12 @@ Execute:
 - Open [exercises/typescript/user-service.test.ts](user-service.test.ts) in the editor.
 - If you have not done so already, accept all previous code changes (if any).
 - Open Copilot Chat.
-- In the agent selector (bottom of chat, usually Agent), choose `ts-test-fixer`.
-- In Copilot Chat, ask: "Write missing tests for `exercises/typescript/user-service.ts`."
+- In the agent selector (bottom of chat usually "Agent"), choose `ts-test-fixer`.
+- In Copilot Chat, type this command:
+```text
+Write missing tests for `exercises/typescript/user-service.ts`
+```
+- Press Enter.
 
 Verify:
 - Open [exercises/typescript/user-service.test.ts](user-service.test.ts) in the editor and confirm it changed with at least one new test for behavior in [exercises/typescript/user-service.ts](user-service.ts).
@@ -151,6 +181,9 @@ Verify:
 - Run `npm test` and confirm the command exits with code `0`.
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 5. Hooks
 Goal: run automatic validation after edits.
@@ -166,11 +199,16 @@ Create:
 			  Name it `ts-post-edit-tests`
 ```
 - Press Enter.
-- Open the generated `ts-post-edit-tests` hook configuration in [`../../.github/`](../../.github/) and review the content.
+- Open [`.github/hooks/ts-post-edit-tests.json`](../../.github/hooks/ts-post-edit-tests.json) and review the content.
+- Open [`.github/hooks/scripts/ts-post-edit-tests.js`](../../.github/hooks/scripts/ts-post-edit-tests.js) and review the content.
 
 Execute:
 - Open [exercises/typescript/user-service.ts](user-service.ts) in the editor.
-- Ask Copilot: "In `exercises/typescript/user-service.ts`, make a tiny safe refactor."
+- In Copilot Chat, type this command:
+```text
+In `exercises/typescript/user-service.ts`, make a tiny safe refactor.
+```
+- Press Enter.
 
 Verify:
 - Confirm a test run starts automatically right after the edit (without manually running `npm test`).
@@ -178,6 +216,9 @@ Verify:
 - Confirm the command exits with code `0`.
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ---
 

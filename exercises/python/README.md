@@ -65,7 +65,8 @@ Successful output means:
 - Sending requests to existing endpoints returns JSON responses.
 
 ## Verify Result
-All OS:
+
+**Tests** — All OS:
 ```bash
 python -m pytest -v
 ```
@@ -78,7 +79,7 @@ Successful verification means:
 
 ## Concept Examples (Simple And Verifiable)
 
-When a step asks you to send a Copilot Chat prompt or slash command, observe the AI reasoning in Chat and wait for it to finish before you continue.
+When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
 
 ### 1. Instructions
 Goal: enforce safer API behavior rules.
@@ -94,23 +95,32 @@ Create:
 
 Execute:
 - Open [exercises/python/legacy_api.py](legacy_api.py) in the editor.
-- Ask Copilot: "In `exercises/python/legacy_api.py`, make `/users/search` return `jsonify` consistently."
+- In Copilot Chat, type this command:
+```text
+In `exercises/python/legacy_api.py`, make `/users/search` return `jsonify` consistently.
+```
+- Press Enter.
 
 Verify:
-- Use the first pytest run to confirm the edited code still passes the existing tests, then use the second pytest run to verify the new AI-generated test and code change together.
 - Run:
 ```bash
 cd exercises/python
 python -m pytest -v
 ```
-- Confirm the command exits with code `0`.
 - Confirm output includes `passed`.
 - Confirm output does not include `failed`.
 - Open [exercises/python/test_legacy_api.py](test_legacy_api.py) in the editor.
-- Ask Copilot: "Add or update a pytest for `/users/search` that asserts the response is JSON and uses consistent JSON fields."
+- In Copilot Chat, type this command:
+```text
+Add or update a pytest for `/users/search` that asserts the response is JSON and uses consistent JSON fields.
+```
+- Press Enter.
 - Accept the test change, and confirm the test checks JSON behavior using `response.is_json` or a `Content-Type` JSON assertion.
 - Re-run `python -m pytest -v` and confirm the command exits with code `0`, output includes `passed`, and output does not include `failed`.
 - Do a source check in [exercises/python/legacy_api.py](legacy_api.py) to confirm `/users/search` returns `jsonify(...)` and does not return `json.dumps(...)`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 2. Prompts
 Goal: create a reusable pytest generation prompt.
@@ -126,7 +136,11 @@ Create:
 
 Execute:
 - Open [exercises/python/legacy_api.py](legacy_api.py) in the editor and select the full `deactivate` endpoint function.
-- With the endpoint selected, open Copilot Chat, type `/py-generate-endpoint-tests`, and press Enter.
+- With the endpoint selected, in Copilot Chat, type this command:
+```text
+/py-generate-endpoint-tests
+```
+- Press Enter.
 - Accept the generated test changes.
 
 Verify:
@@ -134,6 +148,9 @@ Verify:
 - Run `python -m pytest -v` and confirm the command exits with code `0`.
 - Confirm output includes `passed`.
 - Confirm output does not include `failed`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 3. Skill
 Goal: package a reusable API hardening workflow.
@@ -149,12 +166,19 @@ Create:
 
 Execute:
 - Open [exercises/python/legacy_api.py](legacy_api.py) in the editor.
-- In Copilot Chat, type `/py-api-hardening-review exercises/python/legacy_api.py` and press Enter.
+- In Copilot Chat, type this command:
+```text
+/py-api-hardening-review exercises/python/legacy_api.py
+```
+- Press Enter.
 
 Verify:
 - Confirm the output explicitly includes all three check labels: `error handling`, `status codes`, and `response consistency`.
 - Confirm it names at least one endpoint from [exercises/python/legacy_api.py](legacy_api.py).
 - Confirm it includes either one concrete issue with a short fix suggestion, or the exact phrase `no issues found` with brief reasoning.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 4. Agents
 Goal: use a custom agent to add missing endpoint tests, run them, and update source code if it needs to fix a failure.
@@ -173,8 +197,12 @@ Execute:
 - Open [exercises/python/test_legacy_api.py](test_legacy_api.py) in the editor.
 - If you have not done so already, accept all previous code changes (if any).
 - Open Copilot Chat.
-- In the agent selector (bottom of chat, usually Agent), choose `py-endpoint-test-fixer`.
-- In Copilot Chat, ask: "Write missing tests for `exercises/python/legacy_api.py`."
+- In the agent selector (bottom of chat usually "Agent"), choose `py-endpoint-test-fixer`.
+- In Copilot Chat, type this command:
+```text
+Write missing tests for `exercises/python/legacy_api.py`
+```
+- Press Enter.
 
 Verify:
 - Open [exercises/python/test_legacy_api.py](test_legacy_api.py) in the editor and confirm it changed with at least one new test for behavior in [exercises/python/legacy_api.py](legacy_api.py).
@@ -182,6 +210,9 @@ Verify:
 - Run `python -m pytest -v` and confirm the command exits with code `0`.
 - Confirm output includes `passed`.
 - Confirm output does not include `failed`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ### 5. Hooks
 Goal: enforce automatic checks after edits.
@@ -197,11 +228,16 @@ Create:
 			  Name it `py-post-edit-pytest`
 ```
 - Press Enter.
-- Open the generated `py-post-edit-pytest` hook configuration in [`../../.github/`](../../.github/) and review the content.
+- Open [`.github/hooks/py-post-edit-pytest.json`](../../.github/hooks/py-post-edit-pytest.json) and review the content.
+- Open [`.github/hooks/scripts/py-post-edit-pytest.js`](../../.github/hooks/scripts/py-post-edit-pytest.js) and review the content.
 
 Execute:
 - Open [exercises/python/legacy_api.py](legacy_api.py) in the editor.
-- Ask Copilot: "In `exercises/python/legacy_api.py`, make a small safe cleanup."
+- In Copilot Chat, type this command:
+```text
+In `exercises/python/legacy_api.py`, make a small safe cleanup.
+```
+- Press Enter.
 
 Verify:
 - Confirm a pytest run starts automatically right after the edit (without manually running `python -m pytest -v`).
@@ -209,6 +245,9 @@ Verify:
 - Confirm the command exits with code `0`.
 - Confirm output includes `passed`.
 - Confirm output does not include `failed`.
+
+Finish:
+- Click the blue "Keep" button to save all changes made by Copilot
 
 ---
 

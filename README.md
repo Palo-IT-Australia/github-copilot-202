@@ -1,4 +1,4 @@
-# GitHub Copilot Customization excercise
+# GitHub Copilot Customization Exercise
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@
 
 ## Introduction
 
-This is a hands-on training repository for Copilot customisation (instructions, prompts, agents, skills, hooks). We have created 3 simple apps in 3 different languages (Python, TypeScript, JavaScript) which you can use to run exercises in these core concepts:
+This is a hands-on training repository for Copilot customization (instructions, prompts, agents, skills, hooks). We have created 3 simple apps in 3 different languages (Python, TypeScript, JavaScript) that you can use to run exercises in these core concepts:
 - instructions
 - prompts
 - skills
@@ -32,7 +32,7 @@ If you are ready to go and want to jump straight into the exercise, follow the i
 
 ## Learning Objectives
 
-By the end of the exercise, attendees will have learned how to apply all five customisation concepts (instructions, prompts, agents, skills, hooks) using the provided apps at a basic level. This workshop covers foundational implementations and does not explore advanced variations or edge cases for each concept.
+By the end of the exercise, attendees will have learned how to apply all five customization concepts (instructions, prompts, agents, skills, hooks) using the provided apps at a basic level. This workshop covers foundational implementations and does not explore advanced variations or edge cases for each concept.
 
 ---
 
@@ -52,11 +52,11 @@ You are done when you can demonstrate all of the following in one track. For eac
 
 Work through all five concepts in your chosen track README. Each concept has a slash command to create it:
 
-When a step asks you to send a Copilot Chat prompt or slash command, observe the AI reasoning in Chat and wait for it to finish before you continue.
+When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
 
 | # | Concept | What It Does | When To Use | Command |
 |---|---------|--------------|-------------|---------|
-| 1 | Instructions | Always-on project guidance for Copilot behaviour | When you want Copilot to consistently apply rules across requests | `/create-instructions` |
+| 1 | Instructions | Always-on project guidance for Copilot behavior | When you want Copilot to consistently apply rules across requests | `/create-instructions` |
 | 2 | Prompts | Reusable templates for repeated requests | When you repeat the same type of request often | `/create-prompt` |
 | 3 | Skills | Reusable workflows with domain context | For multi-step tasks in a specific area | `/create-skill` |
 | 4 | Agents | End-to-end task execution that can update tests, source code, and validation steps | For larger tasks that may need to update tests, source code, run validation, and fix issues in one workflow | `/create-agent` |
@@ -86,7 +86,7 @@ Choose one primary track based on familiarity with the language. Follow the inst
 
 After completing all five concepts, discuss:
 
-- Which customisation type gave you the highest leverage and why?
+- Which customization type gave you the highest leverage and why?
 - What should become team-wide standards versus personal preferences?
 - Which guardrails should be enforced with hooks instead of instructions?
 - How will you validate AI-generated changes in your real projects?
@@ -96,7 +96,7 @@ After completing all five concepts, discuss:
 ## Troubleshooting
 
 - Slash commands not showing: ensure Copilot Chat is active and type `/` in the chat input.
-- Slash commands not available in your chat mode: switch to the excercise/customization mode provided by your facilitator.
+- Slash commands not available in your chat mode: switch to the exercise/customization mode provided by your facilitator.
 - If a `/` command is still not available, contact your trainer.
 - Dependency issues: rerun install commands in the selected language folder.
 - Python activation problems: use the shell-specific activation command from [exercises/python/README.md](exercises/python/README.md).
