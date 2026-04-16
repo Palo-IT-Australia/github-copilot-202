@@ -51,7 +51,7 @@ Successful verification means:
 When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
 
 ### 1. Instructions
-Goal: make Copilot follow JavaScript rules for this track.
+Goal: make Copilot follow JavaScript rules for this excercise.
 
 Create:
 - In Copilot Chat, type this command:
@@ -139,11 +139,12 @@ Create:
 Execute:
 - In Copilot Chat, type this command:
 ```text
-/js-checkout-review exercises/javascript/cart.js
+Review the checkout logic in cart.js
 ```
 - Press Enter
 
 Verify:
+- Verify the chat output confirmed teh skill was invoked (check message on top)
 - Confirm the skill output explicitly includes all four check labels: `discount order`, `coupon handling`, `tax`, and `rounding`.
 - Confirm it has one failure for rounding
 - Review the result recommendation
