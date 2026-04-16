@@ -1,5 +1,7 @@
 # Python Track
 
+**Note: Typescript and Python excercises are current in development and might not be correct**
+
 ## What This Codebase Does
 This track contains two learning surfaces:
 - `data_processor.py`: CSV-based sales analytics and report generation

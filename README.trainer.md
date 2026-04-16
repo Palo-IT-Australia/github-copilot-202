@@ -5,6 +5,8 @@ This guide is for workshop trainers to quickly orient and facilitate sessions.
 
 ## Language Tracks (Quick Overview)
 - JavaScript: cart and checkout flow, with tests in [exercises/javascript/README.md](exercises/javascript/README.md).
+
+**Note: Typescript and Python excercises are current in development and might not be correct**
 - TypeScript: typed user service and validation logic in [exercises/typescript/README.md](exercises/typescript/README.md).
 - Python: data processing and legacy API hardening in [exercises/python/README.md](exercises/python/README.md).
 

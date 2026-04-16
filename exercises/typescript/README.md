@@ -1,5 +1,7 @@
 # TypeScript Track
 
+**Note: Typescript and Python excercises are current in development and might not be correct**
+
 ## What This Codebase Does
 This track implements a typed user management service with in-memory storage:
 - create and update users
