@@ -1,5 +1,8 @@
 # JavaScript Track
 
+Please note that the examples below have been chosen to allow you to experience the concept. 
+They don't necessarily show good practice
+
 ## What This Codebase Does
 This track implements a shopping cart with item management and checkout calculations:
 - subtotal
@@ -47,7 +50,7 @@ Successful verification means:
 - Output includes a `Test Suites:` line with `1 passed`
 - Output includes a `Tests:` line with `4 passed`
 
-## Concept Examples (Simple And Verifiable)
+## When you submit a Copilot Chat command
 When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
 
 ### 1. Instructions
