@@ -1,10 +1,16 @@
 # JavaScript Track
 
-Please note that the examples below have been chosen to allow you to experience the concept. 
-They don't necessarily show good practice
+Please note that the examples below have been chosen to allow you to experience the concepts of creating:
+  - File bases instruction
+  - reusable Prompt
+  - Skill
+  - Custom Agent
+  - Hooks
 
-## What This Codebase Does
-This track implements a shopping cart with item management and checkout calculations:
+They don't necessarily show good practice implementation
+
+## What this codebase does
+This track implements a shopping cart logic with item management and checkout calculations:
 - subtotal
 - volume discount tiers
 - coupon handling (percent and fixed)
@@ -18,49 +24,58 @@ Main files:
 ## Prerequisites
 - Node.js 18+
 
-## Setup
+### Setup
 All OS:
 ```bash
 cd exercises/javascript
 npm install
 ```
 
-## Run
+### Running the app
 All OS:
 ```bash
 npm start
 ```
 
-Successful output means:
+Successful output:
 - Output shows `=== Cart Demo ===`
 - Output shows an `Items:` section listing products with quantities and prices
 - Output shows `--- Without coupon ---` with `total: 242.55,` value
 - Output shows `--- With 10% coupon ---` with  `total: 218.3` 
 - Output shows `--- With $20 fixed coupon ---` with `total: 220.55` 
 
-## Verify Result
+### Running extsing tests
 
 **Tests** — All OS:
 ```bash
 npm test
 ```
 
-Successful verification means:
+Successful verification:
 - Output includes `PASS` next to the test file name
 - Output includes a `Test Suites:` line with `1 passed`
 - Output includes a `Tests:` line with `4 passed`
 
-## When you submit a Copilot Chat command
-When a step asks you to send a Copilot Chat prompt or slash command, observe the Copilot reasoning in Chat and wait for it to finish before you continue.
+# Excercises
 
-### 1. Instructions
-Goal: make Copilot follow JavaScript rules for this excercise.
+## Important: Copilot Chat
+After you run a Copilot Chat prompt or slash command
+- Observe the Copilot reasoning in Chat and wait for it to finish before you continue.
+  - Light gray text that starts with a verb (e.g. Ran, Reviewed...) are mostly expandable and show you the process that Copilot followed
+- If you see **unexpected results or differences** to what is in the validation steps 
+  - Ask Copliot to explain what it did and how it did it
+  - Explain the bahaviour you are seeing and what you expect to Copilto Chat and ask it to fix the problem
+  - Might be caused by your specifc setup and previous interactions with Copilot
+
+## 1. File Based Instructions
+Goal: make Copilot follow JavaScript and cart rules.
+Note: We make this specific to js files so that it doesnt clash with other instructiosn from other excercise
 
 Create:
 - In Copilot Chat, type this command:
 ```text
-/create-instructions JavaScript rules: prefer const, avoid mutating input arguments, and require input validation for quantity and price.
-                     Quantity and price can never be 0 or less. 
+/create-instructions JavaScript rules: prefer const, avoid mutating input arguments and require input validation
+                     Cart rules: Quantity and price can never be 0 or less. 
                      Only apply this to JavaScript files
                      Name it `js-cart-rules`
 ```
@@ -72,16 +87,20 @@ Execute:
 - Open [exercises/javascript/cart.js](cart.js) in the editor.
 - In Copilot Chat, type this command:
 ```text
-In `exercises/javascript/cart.js`, review the code and check for missing validations in `addItem`
+In `exercises/javascript/cart.js`, review the code and fix missing validations in `addItem`
 ```
 
 Verify:
 - Review the code changes in [exercises/javascript/cart.js](cart.js). Note that checks were added for price and quantity <= 0 without this being explicitly stated in the prompt 
+
+Execute:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor.
 - In Copilot Chat, type this command:
 ```text
 In `exercises/javascript/cart.test.js`, add or update a test that tests the `addItem` validation rules
 ```
+
+Verify:
 - Review and accept the test change. Note that tests were added for price and quantity <= 0 without this being explicitly stated in the prompt
 - Run `npm test` and confirm that the new tests pass.
 - Verify that the number of tests has increased
@@ -94,20 +113,22 @@ Explain which lines were changed in the test file and how the new test proves th
 Finish:
 - Click the blue "Keep" button to save all changes made by Copilot
 
-### 2. Prompts
+## 2. Creating a reusable Prompt
 Goal: create a reusable test-generation prompt.
 
 Create:
 - In Copilot Chat, type this command:
 ```text
 /create-prompt Generate Jest tests for selected JavaScript function: happy path, edge cases, and error case.
+               Update the appropriate test file
                Name it `js-generate-function-tests`
 ```
 - Press Enter.
 - Open [`.github/prompts/js-generate-function-tests.prompt.md`](../../.github/prompts/js-generate-function-tests.prompt.md) and review the content.
 
 Execute:
-- Open [exercises/javascript/cart.js](cart.js) in the editor and select the full `removeItem` function.
+- Open [exercises/javascript/cart.js](cart.js) in the editor 
+  - Select the full `removeItem` function.
 - With the function selected, in Copilot Chat, type this command:
 ```text
 /js-generate-function-tests
@@ -124,7 +145,7 @@ Verify:
 Finish:
 - Click the blue "Keep" button to save all changes made by Copilot 
 
-### 3. Skill
+## 3. Creating a Skill
 Goal: create a reusable review skill for checkout logic.
 
 Create:
@@ -144,10 +165,11 @@ Execute:
 ```text
 Review the checkout logic in cart.js
 ```
+**Note: we did not explicitly call the skill by its name. Copilot infers its usage by the skill description and our prompt**
 - Press Enter
 
 Verify:
-- Verify the chat output confirmed teh skill was invoked (check message on top)
+- Verify the chat output confirmed the skill was invoked (Click on the first Copilot message usually called "reviewed" or "Read")
 - Confirm the skill output explicitly includes all four check labels: `discount order`, `coupon handling`, `tax`, and `rounding`.
 - Confirm it has one failure for rounding
 - Review the result recommendation
@@ -155,7 +177,7 @@ Verify:
 Finish:
 - Click the blue "Keep" button to save all changes made by Copilot 
 
-### 4. Agents
+## 4. Creating a Custom Agent
 Goal: use a custom agent to add missing tests, run them, and update source code if it needs to fix a failure.
 
 Create:
@@ -170,7 +192,7 @@ Create:
 - Open [`.github/agents/js-test-fixer.agent.md`](../../.github/agents/js-test-fixer.agent.md) and review the content.
 
 Execute:
-- Open [exercises/javascript/cart.test.js](cart.test.js) in the editor
+- Open [exercises/javascript/cart.js](cart.js) in the editor
 - Open Copilot Chat.
 - In the agent selector (bottom of chat usually "Agent"), choose `js-test-fixer`
 - In Copilot Chat, type this command:
@@ -182,14 +204,20 @@ check cart.js
 Verify:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it was updated with tests for behavior in [exercises/javascript/cart.js](cart.js).
 - Open [exercises/javascript/cart.js](cart.js) in the editor and confirm the agent also changed source code to fix the rounding error.
-- Run `npm test` and confirm output includes `PASS` next to the test file name.
+- Run npm start
+  - Confirm Output shows 
+    - `--- Without coupon ---` with `total: 242.55,` value
+    - `--- With 10% coupon ---` with  `total: 218.3` 
+    - `--- With $20 fixed coupon ---` with `total: 220.55` 
+- Run `npm test` 
+  - Confirm output includes `PASS` next to the test file name.
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
 
 Finish:
 - Click the blue "Keep" button to save all changes made by Copilot 
 
-### 5. Hooks
+### 5. Creating a Hook
 Goal: automatically validate edits and check for missing function description/comments
 
 Create:
@@ -228,4 +256,4 @@ Finish:
 
 ---
 
-Well done you completed all exercises
+***Well done you completed all exercises**
