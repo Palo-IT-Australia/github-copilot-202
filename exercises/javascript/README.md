@@ -34,7 +34,7 @@ npm install
 ### Running the app
 All OS:
 ```bash
-npm startgit
+npm start
 ```
 
 Successful output:
