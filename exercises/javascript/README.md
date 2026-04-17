@@ -34,7 +34,7 @@ npm install
 ### Running the app
 All OS:
 ```bash
-npm start
+npm startgit
 ```
 
 Successful output:
@@ -204,15 +204,14 @@ check cart.js
 Verify:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it was updated with tests for behavior in [exercises/javascript/cart.js](cart.js).
 - Open [exercises/javascript/cart.js](cart.js) in the editor and confirm the agent also changed source code to fix the rounding error.
-- Run npm start
-  - Confirm Output shows 
-    - `--- Without coupon ---` with `total: 242.55,` value
-    - `--- With 10% coupon ---` with  `total: 218.3` 
-    - `--- With $20 fixed coupon ---` with `total: 220.55` 
-- Run `npm test` 
+- Run `npm start`, then confirm output shows 
+  - `--- Without coupon ---` with `total: 242.55,`
+  - `--- With 10% coupon ---` with  `total: 218.3` 
+  - `--- With $20 fixed coupon ---` with `total: 220.55` 
+- Run `npm test`, then confirm output shows 
   - Confirm output includes `PASS` next to the test file name.
-- Confirm output includes a `Test Suites:` line with `passed`.
-- Confirm output includes a `Tests:` line with `passed`.
+  - Confirm output includes a `Test Suites:` line with `passed`.
+  - Confirm output includes a `Tests:` line with `passed`.
 
 Finish:
 - Click the blue "Keep" button to save all changes made by Copilot 
