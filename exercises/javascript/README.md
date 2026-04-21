@@ -115,7 +115,7 @@ Explain which lines were changed in the test file and how the new test proves th
 - Review the explanation
 
 Finish:
-- Click the blue "Keep" button to save all changes made by Copilot
+- Click the blue "Keep" button to save all changes
 
 ## 2. Creating a reusable Prompt
 Goal: create a reusable test-generation prompt.
@@ -251,7 +251,7 @@ Verify:
 - Note the output, which lists all functions that do not have comments.
 
 Finish:
-- Click the blue "Keep" button to save all changes made by Copilot
+- Click the blue "Keep" button to save all changes
 
 ---
 
