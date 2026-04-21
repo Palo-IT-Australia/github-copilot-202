@@ -1,7 +1,7 @@
 # JavaScript Track
 
 Please note that the examples below have been chosen to allow you to experience the concepts of creating:
-  - File bases instruction
+  - File based instruction
   - reusable Prompt
   - Skill
   - Custom Agent
@@ -44,7 +44,7 @@ Successful output:
 - Output shows `--- With 10% coupon ---` with  `total: 218.3` 
 - Output shows `--- With $20 fixed coupon ---` with `total: 220.55` 
 
-### Running extsing tests
+### Running existing tests
 
 **Tests** — All OS:
 ```bash
@@ -56,20 +56,22 @@ Successful verification:
 - Output includes a `Test Suites:` line with `1 passed`
 - Output includes a `Tests:` line with `4 passed`
 
-# Excercises
+# Exercises
 
-## Important: Copilot Chat
+## Important
+**You will need VS Code 1.110 or higher**
+
 After you run a Copilot Chat prompt or slash command
 - Observe the Copilot reasoning in Chat and wait for it to finish before you continue.
   - Light gray text that starts with a verb (e.g. Ran, Reviewed...) are mostly expandable and show you the process that Copilot followed
 - If you see **unexpected results or differences** to what is in the validation steps 
-  - Ask Copliot to explain what it did and how it did it
-  - Explain the bahaviour you are seeing and what you expect to Copilto Chat and ask it to fix the problem
-  - Might be caused by your specifc setup and previous interactions with Copilot
+  - Ask Copilot to explain what it did and how it did it
+  - Explain the behaviour you are seeing and what you expect to Copilot Chat and ask it to fix the problem
+  - Might be caused by your specific setup and previous interactions with Copilot
 
 ## 1. File Based Instructions
 Goal: make Copilot follow JavaScript and cart rules.
-Note: We make this specific to js files so that it doesnt clash with other instructiosn from other excercise
+Note: We make this specific to js files so that it doesn't clash with other instructions from other exercise
 
 Create:
 - In Copilot Chat, type this command:
@@ -101,7 +103,9 @@ In `exercises/javascript/cart.test.js`, add or update a test that tests the `add
 ```
 
 Verify:
-- Review and accept the test change. Note that tests were added for price and quantity <= 0 without this being explicitly stated in the prompt
+- Review the test change
+   - Note that tests were added for price and quantity <= 0 without this being explicitly stated in the prompt
+- Click the blue "Keep" button to save all changes
 - Run `npm test` and confirm that the new tests pass.
 - Verify that the number of tests has increased
 - In Copilot Chat, type this command:
@@ -137,13 +141,11 @@ Execute:
 
 Verify:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it contains at least one new test that calls `removeItem` and checks the expected cart behavior after removal.
+- Click the blue "Keep" button to save all changes
 - Run `npm test` and confirm output includes `PASS` next to the test file name.
 - Confirm output includes a `Test Suites:` line with `passed`.
 - Confirm output includes a `Tests:` line with `passed`.
-- Note the newly added tests
-
-Finish:
-- Click the blue "Keep" button to save all changes made by Copilot 
+- Note the newly added tests 
 
 ## 3. Creating a Skill
 Goal: create a reusable review skill for checkout logic.
@@ -175,7 +177,7 @@ Verify:
 - Review the result recommendation
 
 Finish:
-- Click the blue "Keep" button to save all changes made by Copilot 
+- Click the blue "Keep" button to save all changes
 
 ## 4. Creating a Custom Agent
 Goal: use a custom agent to add missing tests, run them, and update source code if it needs to fix a failure.
@@ -204,6 +206,7 @@ check cart.js
 Verify:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor and confirm it was updated with tests for behavior in [exercises/javascript/cart.js](cart.js).
 - Open [exercises/javascript/cart.js](cart.js) in the editor and confirm the agent also changed source code to fix the rounding error.
+- Click the blue "Keep" button to save all changes
 - Run `npm start`, then confirm output shows 
   - `--- Without coupon ---` with `total: 242.55,`
   - `--- With 10% coupon ---` with  `total: 218.3` 
@@ -211,10 +214,7 @@ Verify:
 - Run `npm test`, then confirm output shows 
   - Confirm output includes `PASS` next to the test file name.
   - Confirm output includes a `Test Suites:` line with `passed`.
-  - Confirm output includes a `Tests:` line with `passed`.
-
-Finish:
-- Click the blue "Keep" button to save all changes made by Copilot 
+  - Confirm output includes a `Tests:` line with `passed`. 
 
 ### 5. Creating a Hook
 Goal: automatically validate edits and check for missing function description/comments
