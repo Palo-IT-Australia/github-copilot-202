@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,python,pythonvanilla,git,intellij+all,windows,macos,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,python,pythonvanilla,git,intellij+all,windows,macos,linux
 
+# Copilot customization artifacts - not saved in repo as users will generate them themselves
+# (instructions, agents, prompts, skills, hooks, etc.)
+.github/
+
 ### Git ###
 # Created by git for backups. To disable backups in Git:
 # $ git config --global mergetool.keepBackup false
