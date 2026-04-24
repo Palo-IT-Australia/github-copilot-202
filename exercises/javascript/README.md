@@ -71,7 +71,7 @@ After you run a Copilot Chat prompt or slash command
 
 ## 1. File Based Instructions
 Goal: make Copilot follow JavaScript and cart rules.
-Note: We make this specific to js files so that it doesn't clash with other instructions from other exercise
+Note: We make this specific to JavaScript files so that it doesn't clash with instructions from other language tracks
 
 Create:
 - In Copilot Chat, type this command:
@@ -83,7 +83,7 @@ Create:
 ```
 - Press Enter.
 - Open [`.github/instructions/js-cart-rules.instructions.md`](../../.github/instructions/js-cart-rules.instructions.md) and review the content.
-- Note that it only applies to JavaScript files via `applyTo: "**/*.js"` (only visible in the editor, not Markdown preview)
+- Verify it applies only to JavaScript files via the `applyTo: "**/*.js"` pattern (visible in the editor, not in Markdown preview)
 
 Execute:
 - Open [exercises/javascript/cart.js](cart.js) in the editor.
@@ -93,7 +93,7 @@ In `exercises/javascript/cart.js`, review the code and fix missing validations i
 ```
 
 Verify:
-- Review the code changes in [exercises/javascript/cart.js](cart.js). Note that checks were added for price and quantity <= 0 without this being explicitly stated in the prompt 
+- Review the code changes in [exercises/javascript/cart.js](cart.js). Confirm that validation checks were added for price and quantity <= 0, even though the prompt did not explicitly name them 
 
 Execute:
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor.
@@ -167,14 +167,22 @@ Execute:
 ```text
 Review the checkout logic in cart.js
 ```
-**Note: we did not explicitly call the skill by its name. Copilot infers its usage by the skill description and our prompt**
+**Note: Copilot will infer the usage of this skill by its description and your prompt.**
 - Press Enter
 
 Verify:
-- Verify the chat output confirmed the skill was invoked (Click on the first Copilot message usually called "reviewed" or "Read")
-- Confirm the skill output explicitly includes all four check labels: `discount order`, `coupon handling`, `tax`, and `rounding`.
-- Confirm it has one failure for rounding
-- Review the result recommendation
+- In the Chat panel, check for an expandable "Reviewed" or reasoning section showing the skill was used.
+- Confirm the response:
+  - Includes all four check labels: `discount order`, `coupon handling`, `tax`, and `rounding` as separate, labeled sections (not generic observations).
+  - Names specific functions or code locations in `cart.js` (not just generic findings).
+  - Organizes findings by pass and fail groups.
+- Review at least one concrete issue or recommendation in the output.
+
+If the checks above are not met, the skill may not have been automatically invoked. Use this explicit command instead:
+```text
+/js-checkout-review
+```
+- Press Enter and repeat the verification checks above.
 
 Finish:
 - Click the blue "Keep" button to save all changes
@@ -185,9 +193,10 @@ Goal: use a custom agent to add missing tests, run them, and update source code 
 Create:
 - In Copilot Chat, type this command:
 ```text
-/create-agent Agent that writes missing Jest tests for a selected JS file
-			  Tests are run automatically with verification of result
-			  If a test fails, update the related source code to fix it. Confirm the fix works
+/create-agent Agent that writes missing Jest tests for a selected JS file.
+			  Tests are run automatically with verification of result.
+			  If a test fails, update the related source code to fix it. 
+        Confirm the fix works.
 			  Name it `js-test-fixer`
 ```
 - Press Enter.
