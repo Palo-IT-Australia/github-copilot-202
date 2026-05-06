@@ -83,9 +83,12 @@ After you run a Copilot Chat prompt or slash command
   - Explain the behaviour you are seeing and what you expect to Copilot Chat and ask it to fix the problem
   - Might be caused by your specific setup and previous interactions with Copilot
 
-## 1. File Based Instructions
+## 1. Creating File Based Instruction
 
-Goal: make Copilot follow JavaScript and cart rules.
+*Custom instructions enable you to define common guidelines and rules that automatically influence how AI generates code and handles other development tasks. Instead of manually including context in every chat prompt, specify custom instructions in a Markdown file to ensure consistent AI responses that align with your coding practices and project requirements.*
+More information here: [Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)
+
+Goal: Copilot will always follow our JavaScript coding standards and enforce cart rules (amount & price cannot be <0)
 Note: We make this specific to JavaScript files so that it doesn't clash with instructions from other language tracks
 
 Create:
@@ -112,10 +115,13 @@ Execute:
 In `exercises/javascript/cart.js`, review the code and fix missing validations in `addItem`
 ```
 
+- When making changes Copilot will enforce the rules set out in the instruction file
+
 Verify:
 
-- Review the code changes in [exercises/javascript/cart.js](cart.js). Confirm that validation checks were added for price and quantity <= 0, even though the prompt did not explicitly name them
-
+- Review the code changes in [exercises/javascript/cart.js](cart.js)
+- Confirm that validation checks were added for price and quantity <= 0, even though the prompt did not explicitly name them
+  
 Execute:
 
 - Open [exercises/javascript/cart.test.js](cart.test.js) in the editor.
@@ -146,14 +152,17 @@ Finish:
 
 ## 2. Creating a reusable Prompt
 
-Goal: create a reusable test-generation prompt.
+*Prompt files, also known as slash commands, let you simplify prompting for common tasks by encoding them as standalone Markdown files that you can invoke directly in chat. Each prompt file includes task-specific context and guidelines about how the task should be performed.*
+More information here [Prompt Files](https://code.visualstudio.com/docs/copilot/customization/prompt-files)
+
+Goal: Create a reusable prompt that generates tests .
 
 Create:
 
 - In Copilot Chat, type this command:
 
 ```text
-/create-prompt Generate Jest tests for selected JavaScript function: happy path, edge cases, and error case.
+/create-prompt Generate Jest tests for the selected JavaScript function include happy path, edge cases, and error case.
                Update the appropriate test file
                Name it `js-generate-function-tests`
 ```
@@ -172,6 +181,7 @@ Execute:
 ```
 
 - Press Enter.
+- Tests will be created for the selected function
 
 Verify:
 
@@ -182,9 +192,12 @@ Verify:
 - Confirm output includes a `Tests:` line with `passed`.
 - Note the newly added tests
 
-## 3. Creating a Skill
+## 3. Creating a Agent Skill
 
-Goal: create a reusable review skill for checkout logic.
+*Agent Skills are folders of instructions, scripts, and resources that GitHub Copilot can load when relevant to perform specialized tasks. Agent Skills is an open standard that works across multiple AI agents, including GitHub Copilot in VS Code, GitHub Copilot CLI, and GitHub Copilot cloud agent.*
+More information here [Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+
+Goal: Create a reusable skill that reviews the checkout logic and provides feedback.
 
 Create:
 
@@ -209,8 +222,9 @@ Execute:
 Review the checkout logic in cart.js
 ```
 
-- **Note: Copilot will infer the usage of this skill by its description and your prompt.**
+- **Note: Copilot will infer the usage of this skill by its description in your prompt.**
 - Press Enter
+- The skill will be executed, reviews the logic and provides feedback
 
 Verify:
 
@@ -235,7 +249,10 @@ Finish:
 
 ## 4. Creating a Custom Agent
 
-Goal: use a custom agent to add missing tests, run them, and update source code if it needs to fix a failure.
+*Custom agents enable you to configure the AI to adopt different personas tailored to specific development roles and tasks. For example, you might create agents for a security reviewer, planner, solution architect, or other specialized roles. Each persona can have its own behavior, available tools, and instructions.*
+More information here [Custom Agents])(https://code.visualstudio.com/docs/copilot/customization/custom-agents)
+
+Goal: use a custom agent to add missing tests, run them, and update source code if a test fails.
 
 Create:
 
@@ -281,7 +298,12 @@ Verify:
 
 ### 5. Creating a Hook
 
-Goal: Automatically run a check on any JavaScript files that have been edited by a Agent tool. It will  list functions without description (no // or /* ... */ before the function name).
+**Note: Depending in the training Hooks might not have covered. You can complete the exercise if you want.**
+
+*Hooks enable you to execute custom shell commands at key lifecycle points during agent sessions. Use hooks to automate workflows, enforce security policies, validate operations, and integrate with external tools.*
+More information here [Agent hooks](https://code.visualstudio.com/docs/copilot/customization/hooks)
+
+Goal: After each *tool* call that modifies a JavaScript file we want to run a script that outputs the name of any functions that doesn't have a description (// or /* ... */) before the function name.
 
 Create:
 
@@ -300,8 +322,10 @@ Create:
 
 - Press Enter.
 - Please note that the create-hook command is very explicit on what to create and how to deal with relative paths. This was done because we had previously had problems with hooks not firing.
-- Open [`.github/hooks/js-missing-function-comments.json`](../../.github/hooks/js-missing-function-comments.json) and review the content.
-- Open [`.github/hooks/scripts/js-missing-function-comments.js`](../../.github/hooks/scripts/js-missing-function-comments.js) and review the content.
+- Open [`.github/hooks`](../../.github/hooks) and review the content.
+  - This contains the JSON file defining the hook
+- Open [`.github/hooks/scripts/scripts`](../../.github/hooks/scripts) and review the content.
+  - This contains scripts that are run when the Hook is executed
 
 Execute:
 
@@ -312,11 +336,12 @@ Execute:
 In `exercises/javascript/cart.js`, make a tiny safe edit such as renaming a local variable only
 ```
 
+- This made a small edit to the cart.js file. The hook will have been executed after the change has been made.
+
 Verify:
 
-- Check the Chat output.
-- Click on **... received a warning** message in the chat output
-- Click on **Warning from Post-Tool Use hook**
+- Check the Chat output and search for the below messages from the hook execution
+- Click on *... received a warning* then click on *Warning from Post-Tool Use hook*
 - Note the output, which lists all functions that do not have comments.
 
 Finish:
