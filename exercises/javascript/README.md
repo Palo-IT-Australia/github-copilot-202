@@ -192,7 +192,7 @@ Verify:
 - Confirm output includes a `Tests:` line with `passed`.
 - Note the newly added tests
 
-## 3. Creating a Agent Skill
+## 3. Creating an Agent Skill
 
 *Agent Skills are folders of instructions, scripts, and resources that GitHub Copilot can load when relevant to perform specialized tasks. Agent Skills is an open standard that works across multiple AI agents, including GitHub Copilot in VS Code, GitHub Copilot CLI, and GitHub Copilot cloud agent.*
 More information here [Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
