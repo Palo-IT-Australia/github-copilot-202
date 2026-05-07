@@ -298,7 +298,7 @@ Verify:
 
 ### 5. Creating a Hook
 
-**Note: Depending in the training Hooks might not have covered. You can complete the exercise if you want.**
+**Note: Depending on the training Hooks might not have been covered. You can complete the exercise if you want.**
 
 *Hooks enable you to execute custom shell commands at key lifecycle points during agent sessions. Use hooks to automate workflows, enforce security policies, validate operations, and integrate with external tools.*
 More information here [Agent hooks](https://code.visualstudio.com/docs/copilot/customization/hooks)
