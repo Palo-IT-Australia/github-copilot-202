@@ -1,5 +1,7 @@
 # Python Track
 
+> **⚠ UNDER CONSTRUCTION — Do not use this track at this time.**
+
 **Note: Typescript and Python excercises are current in development and might not be correct**
 
 ## What This Codebase Does

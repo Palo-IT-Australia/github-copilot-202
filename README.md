@@ -77,8 +77,8 @@ Use the code in [exercises/](exercises/) as your playground.
 The codebases differ by language and domain but the learning objectives are the same.
 Choose one primary track based on familiarity with the language. Follow the instructions in the selected track README.
 - JavaScript track: [exercises/javascript/README.md](exercises/javascript/README.md)
-- TypeScript track: [exercises/typescript/README.md](exercises/typescript/README.md)
-- Python track: [exercises/python/README.md](exercises/python/README.md)
+- TypeScript track: [exercises/typescript/README.md](exercises/typescript/README.md) ⚠ **Under construction — do not use**
+- Python track: [exercises/python/README.md](exercises/python/README.md) ⚠ **Under construction — do not use**
 
 ---
 
