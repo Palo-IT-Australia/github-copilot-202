@@ -282,7 +282,7 @@ Done early? Try the UI test case. You will see the failure with your own eyes fi
 npm run tc1:headed
 ```
 
-A Chrome window opens and runs the test. It loads the Skyline Air page, picks Sydney and Melbourne, and then **sits there** waiting for a button it can't find, until the test times out. Watch what the page shows and what the test is trying to click.
+A browser window opens and runs the test in **slow motion**. Watch it load the Skyline Air page, pick Sydney, pick Melbourne, and then **stall**: it is waiting for a button it can't find, and about 15 seconds later the test times out and the window closes. The red error in the terminal is expected. Watch what the page shows and what the test is trying to click.
 
 (For a timeline you can scrub through instead, run `npm run tc1:ui` and click a test. Close the window when you are done. Or, in the Testing view, tick **Show browser** and run the test from there.)
 
@@ -307,7 +307,7 @@ Also open `test-results/<failed test folder>/error-context.md`. Playwright write
 
 - **Verdict:** is the test wrong, or the page? How does the evidence show it?
 - **Where should the fix go?** Page object, spec or app?
-- Apply the fix, click **Keep**, and run `npm run tc1`. Fixing one locator may reveal another failure. Go round again.
+- Apply the fix, click **Keep**, and run `npm run tc1`. Copilot may find a second stale locator when it runs the tests and fix both. If not, fixing one locator can reveal another failure: go round again.
 - Review the result with your skill: `Review tests/e2e/tc1-flight-search.spec.ts`.
 
 ---

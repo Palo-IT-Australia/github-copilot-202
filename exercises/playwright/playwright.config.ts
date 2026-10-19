@@ -12,6 +12,8 @@ export default defineConfig({
     baseURL: BASE_URL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
+    // Set by `npm run tc1:headed` so you can watch each step. 0 = full speed.
+    launchOptions: { slowMo: Number(process.env.PW_SLOWMO ?? 0) },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   // Starts the Skyline Air demo app automatically; reuses it if already running.
