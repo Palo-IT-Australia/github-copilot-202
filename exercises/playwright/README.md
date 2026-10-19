@@ -37,7 +37,7 @@ You are done when you can demonstrate each of these:
 
 After you run a prompt or slash command, **watch Copilot's reasoning in Chat and wait for it to finish** before moving on. If your result differs from what is described, ask Copilot to explain, or ask the trainer.
 
-**Start every chat as a Local chat.** In the Chat panel, make sure the session type is **Local** (not **Copilot** or **Cloud**). Copilot sessions work from the repository root, create files in the wrong `.github` folder, and do not run this folder's hooks.
+**Start every chat as a Local chat.** In the Chat panel, make sure the chip at the bottom left of the chat box says **Local** (not **Copilot** or **Cloud**). See the picture in [PRE-WORK.md](PRE-WORK.md). Copilot sessions work from the repository root, create files in the wrong `.github` folder, and do not run this folder's hooks.
 
 **Where your files go.** Everything you create with `/create-…` must end up inside **this folder's** `.github/` (for example `.github/prompts/…`). Copilot sometimes creates the file in the `.github` folder at the repository root instead. If that happens, move the file into this folder's `.github`, in the same subfolder. Otherwise Copilot will not load it. To check, open the cog wheel menu in the Chat panel, choose **Customizations**, and look for your item under **Workspace**.
 

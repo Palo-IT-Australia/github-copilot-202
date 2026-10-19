@@ -28,12 +28,15 @@ The hands-on session is 45 minutes and has no time for installs. Do all of this 
 
    **Expected:** `2 passed`. The Playwright config starts the demo app for you.
 5. Open **Copilot Chat**, select **Agent** mode, and say hello. It should reply.
+   **Check the session type.** The chip at the bottom left of the chat box must say **Local**, as in the picture below. If it says **Copilot** or **Cloud**, click it and choose **Local** under *Continue In* (or press `Ctrl+N` for a new chat session and check again). Copilot and Cloud sessions work from the repository root and skip this exercise's hooks.
+
+   ![Chat session type picker with Local selected](docs/images/chat-session-type.png)
 6. Open the **Testing** view (beaker icon). You should see the tests listed.
 
 ## Done when
 
 - `npm run smoke` shows `2 passed`
-- Copilot Chat replies in Agent mode
+- Copilot Chat replies in Agent mode, and the session type chip says **Local**
 - The Explorer root shows `app`, `tests` and `package.json` (you opened the `exercises/playwright` folder)
 
 ## Problems?
