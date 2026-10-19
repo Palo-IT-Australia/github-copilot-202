@@ -1,7 +1,7 @@
-diff --git a/app/server.js b/app/server.js
+diff --git a/exercises/playwright/app/server.js b/exercises/playwright/app/server.js
 index 85ecf06..129f508 100644
---- a/app/server.js
-+++ b/app/server.js
+--- a/exercises/playwright/app/server.js
++++ b/exercises/playwright/app/server.js
 @@ -43,7 +43,7 @@ app.post('/api/bookings', (req, res) => {
      flightId: flight.id,
      passengerName: passengerName.trim(),

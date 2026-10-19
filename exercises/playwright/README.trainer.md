@@ -78,11 +78,12 @@ Both UI tests time out on `#search-btn`. Then `.flight-row` is stale as well. Fi
 `inputs/tc1-flight-search/failure-output.txt` and `inputs/tc2-create-booking/failure-output.txt` hold the real failure output, in case you need to show it without running the tests live.
 
 ## Solutions for the seeded failures
+Run from the **repo root** (the patches use repo-root paths):
 ```bash
-git apply trainer/solutions/tc1-fix-stale-locators.patch
-git apply trainer/solutions/tc2-fix-total-calculation.patch
-npm test          # expect 6 passed once both fixes are applied (smoke 2, TC1 2, TC2 2)
-git checkout .    # reset
+git apply exercises/playwright/trainer/solutions/tc1-fix-stale-locators.patch
+git apply exercises/playwright/trainer/solutions/tc2-fix-total-calculation.patch
+cd exercises/playwright && npm test    # expect 6 passed once both fixes are applied (smoke 2, TC1 2, TC2 2)
+git checkout -- exercises/playwright   # reset (from the repo root)
 ```
 
 ## Facilitation tips

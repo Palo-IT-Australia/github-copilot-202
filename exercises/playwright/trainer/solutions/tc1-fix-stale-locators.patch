@@ -1,7 +1,7 @@
-diff --git a/tests/pages/flight-search.page.ts b/tests/pages/flight-search.page.ts
+diff --git a/exercises/playwright/tests/pages/flight-search.page.ts b/exercises/playwright/tests/pages/flight-search.page.ts
 index 82697b7..0573b3d 100644
---- a/tests/pages/flight-search.page.ts
-+++ b/tests/pages/flight-search.page.ts
+--- a/exercises/playwright/tests/pages/flight-search.page.ts
++++ b/exercises/playwright/tests/pages/flight-search.page.ts
 @@ -12,8 +12,8 @@ export class FlightSearchPage {
    constructor(private readonly page: Page) {
      this.fromSelect = page.getByLabel('From');
