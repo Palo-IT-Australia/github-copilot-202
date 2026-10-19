@@ -8,6 +8,8 @@
     "start": "node app/server.js",
     "test": "playwright test",
     "tc1": "playwright test --grep @tc1",
+    "tc1:headed": "playwright test --grep @tc1 --headed --workers=1",
+    "tc1:ui": "playwright test --grep @tc1 --ui",
     "tc2": "playwright test --grep @tc2",
     "api": "playwright test --grep @api",
     "smoke": "playwright test --grep @smoke",

@@ -274,15 +274,41 @@ Use only the local demo app. Never point it at real sites or production.
 
 ## Stretch: UI test case (TC1)
 
-Done early? Run the UI test case and use **your own** prompt, skill and agent on it:
+Done early? Try the UI test case. You will see the failure with your own eyes first, then use **your own** prompt, skill and agent on it.
+
+**Step 1. Watch it fail in a real browser:**
 
 ```bash
-npm run tc1
+npm run tc1:headed
 ```
 
-- Triage it with `/triage-failing-test`. Is the test wrong, or the page?
-- Review the fix with `/api-test-review` style checks, adapted to UI.
-- Reference: [inputs/tc1-flight-search/](inputs/tc1-flight-search/)
+A Chrome window opens and runs the test. It loads the Skyline Air page, picks Sydney and Melbourne, and then **sits there** waiting for a button it can't find, until the test times out. Watch what the page shows and what the test is trying to click.
+
+(For a timeline you can scrub through instead, run `npm run tc1:ui` and click a test. Close the window when you are done. Or, in the Testing view, tick **Show browser** and run the test from there.)
+
+**Step 2. Look at what Playwright captured:**
+
+```bash
+npm run report
+```
+
+The HTML report opens. Open the failed test and look at:
+- the **error**: `waiting for locator('#search-btn')`
+- the **screenshot** of the page at the moment of failure
+- the **trace**: click through the actions. It shows each step, the page at that moment, and the click that never found its target.
+
+Also open `test-results/<failed test folder>/error-context.md`. Playwright writes it for you: the error plus a **snapshot of the page's real controls**. Look for the search button there. What is it actually called?
+
+**Step 3. Triage it with Copilot.** Attach that `error-context.md` file as context (the paperclip, or drag it into Chat), then:
+
+```text
+/triage-failing-test the flight search tests in tc1-flight-search.spec.ts
+```
+
+- **Verdict:** is the test wrong, or the page? How does the evidence show it?
+- **Where should the fix go?** Page object, spec or app?
+- Apply the fix, click **Keep**, and run `npm run tc1`. Fixing one locator may reveal another failure. Go round again.
+- Review the result with your skill: `Review tests/e2e/tc1-flight-search.spec.ts`.
 
 ---
 
