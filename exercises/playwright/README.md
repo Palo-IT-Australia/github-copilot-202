@@ -65,29 +65,35 @@ Goal: Copilot always follows our Playwright team standards.
                      import test and expect from tests/fixtures, never from @playwright/test.
                      API tests use the typed clients in the fixtures, never raw fetch.
                      Locators live in page objects, none in specs.
-                     No waitForTimeout. Every test has a tag. Never weaken an assertion.
+                     No waitForTimeout. Never weaken an assertion.
+                     Every test has at least one tag, like @api or @tc2.
                      Only apply to TypeScript files.
                      Name it `qe-playwright-rules`
 ```
 
-- Press Enter.
+- Press Enter. If Copilot asks a clarifying question, answer briefly (for example "any tags, at least one") and let it finish.
 - Open `.github/instructions/qe-playwright-rules.instructions.md` and review it.
 - Check it applies only to TypeScript via `applyTo: "**/*.ts"` (visible in the editor, not in Markdown preview).
 
 **Execute:**
 
-- Open [tests/api/tc2-create-booking.spec.ts](tests/api/tc2-create-booking.spec.ts).
+- Close any open spec files first, so Copilot has no existing test to copy. Whatever it follows now comes from your instructions.
 - In Copilot Chat, type:
 
 ```text
-In tests/api/tc2-create-booking.spec.ts, add a test for booking an unknown flight
+Create a new spec tests/api/booking-validation.spec.ts that tests booking validation:
+a missing passenger name, and an unknown flight
 ```
 
 **Verify:**
 
-- Review the new test.
-- Confirm it follows your rules even though the prompt didn't mention them: it uses `bookingsApi` (not `fetch`), carries a tag, and asserts status and the error body.
-- Click **Keep**, then run `npm run tc2`. The new test should pass (the original TC2 failure is still there, which is expected).
+- Open the new file and confirm it follows your rules even though the prompt didn't mention them:
+  - it imports `test` and `expect` from `../fixtures` (not `@playwright/test`)
+  - it uses `bookingsApi` (not `fetch` or a raw request)
+  - every test has a tag
+  - it asserts the status code and the error body
+- Click **Keep**, then run `npx playwright test tests/api/booking-validation.spec.ts`. The new tests should pass.
+- Copilot may offer to fix the failing booking-total test (TC2). **Decline for now.** That is Concept 2.
 
 ---
 
