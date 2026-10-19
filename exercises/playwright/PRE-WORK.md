@@ -34,6 +34,7 @@ The hands-on session is 45 minutes and has no time for installs. Do all of this 
 
 - `npm run smoke` shows `2 passed`
 - Copilot Chat replies in Agent mode
+- The Explorer root shows `app`, `tests` and `package.json` (you opened the `exercises/playwright` folder)
 
 ## Problems?
 
@@ -42,6 +43,7 @@ The hands-on session is 45 minutes and has no time for installs. Do all of this 
 | `npm ci` fails behind a proxy | Ask IT for the npm registry setting, or contact the trainer |
 | Browser download blocked | Contact the trainer before the session for an alternative |
 | Port 3100 is in use | Stop what is using it, or set `PORT` and `BASE_URL` in a `.env` file |
+| Copilot says `Denied by preToolUse hook` | A hook from another plugin on your machine is failing. Disable or uninstall that plugin, reload VS Code, and try again |
 | Copilot Chat does not reply | Sign in to GitHub from the VS Code account menu and check your Copilot subscription |
 
 If you cannot get it working, tell the trainer **before** the session so you can be paired with someone.

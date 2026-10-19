@@ -37,6 +37,8 @@ You are done when you can demonstrate each of these:
 
 After you run a prompt or slash command, **watch Copilot's reasoning in Chat and wait for it to finish** before moving on. If your result differs from what is described, ask Copilot to explain, or ask the trainer.
 
+**Where your files go.** Everything you create with `/create-…` must end up inside **this folder's** `.github/` (for example `.github/prompts/…`). Copilot sometimes creates the file in the `.github` folder at the repository root instead. If that happens, move the file into this folder's `.github`, in the same subfolder. Otherwise Copilot will not load it. To check, open the cog wheel menu in the Chat panel, choose **Customizations**, and look for your item under **Workspace**.
+
 ## Start (about 4 min)
 
 Run the API test case (TC2):
@@ -66,13 +68,14 @@ Goal: Copilot always follows our Playwright team standards.
                      API tests use the typed clients in the fixtures, never raw fetch.
                      Locators live in page objects, none in specs.
                      No waitForTimeout. Never weaken an assertion.
-                     Every test has at least one tag, like @api or @tc2.
+                     Every test has at least one tag, like @api.
                      Only apply to TypeScript files.
+                     Save it in this folder's .github/instructions, not the repo root.
                      Name it `qe-playwright-rules`
 ```
 
 - Press Enter. If Copilot asks a clarifying question, answer briefly (for example "any tags, at least one") and let it finish.
-- Open `.github/instructions/qe-playwright-rules.instructions.md` and review it.
+- Open `.github/instructions/qe-playwright-rules.instructions.md` and review it. It should be listed under **Workspace** in Customizations > Instructions.
 - Check it applies only to TypeScript via `applyTo: "**/*.ts"` (visible in the editor, not in Markdown preview).
 
 **Execute:**
@@ -82,7 +85,7 @@ Goal: Copilot always follows our Playwright team standards.
 
 ```text
 Create a new spec tests/api/booking-validation.spec.ts that tests booking validation:
-a missing passenger name, and an unknown flight
+a blank passenger name (only spaces), and an unknown flight
 ```
 
 **Verify:**
@@ -91,7 +94,7 @@ a missing passenger name, and an unknown flight
   - it imports `test` and `expect` from `../fixtures` (not `@playwright/test`)
   - it uses `bookingsApi` (not `fetch` or a raw request)
   - every test has a tag
-  - it asserts the status code and the error body
+  - it asserts the status code and the error body (`400` for the blank name, `404` for the unknown flight)
 - Click **Keep**, then run `npx playwright test tests/api/booking-validation.spec.ts`. The new tests should pass.
 - Copilot may offer to fix the failing booking-total test (TC2). **Decline for now.** That is Concept 2.
 
@@ -112,9 +115,11 @@ Goal: a repeatable way to triage any failing test.
                Propose the smallest fix and the file it belongs in.
                Never add sleeps, skip the test, or weaken an assertion.
                Return: Verdict, Evidence, Proposed fix.
+               Save it in this folder's .github/prompts, not the repo root.
                Name it `triage-failing-test`
 ```
 
+- If Copilot asks where to create it, choose **Workspace**.
 - Open `.github/prompts/triage-failing-test.prompt.md` and review it.
 
 **Execute:**
@@ -130,7 +135,7 @@ Goal: a repeatable way to triage any failing test.
 
 - The answer states a verdict and evidence.
 - It points at the app (`app/server.js`, the total calculation), not the test.
-- Ask Copilot to apply the fix. Click **Keep**, then run `npm run tc2`. Both tests should now pass.
+- The prompt only diagnoses and does not change files. Send a follow-up message: `Apply the proposed fix`. Click **Keep**, then run `npm run tc2`. All the `@tc2` tests should now pass.
 
 ---
 
@@ -149,12 +154,16 @@ Goal: a reusable review of API specs against team standards.
               no waitForTimeout, synthetic data only.
               Sort the output into pass and fail, and suggest short fixes for fails.
               Format it nicely.
+              Save it in this folder's .github/skills, not the repo root.
               Name it `api-test-review`
 ```
 
-- Open `.github/skills/api-test-review/SKILL.md` and review it.
+- If Copilot asks where to create it, choose **Workspace**.
+- Open `.github/skills/api-test-review/SKILL.md` and review it. It should be listed under Customizations > Skills.
 
 **Execute:**
+
+Close other spec files first, then type:
 
 ```text
 Review tests/api/tc2-create-booking.spec.ts
@@ -184,15 +193,17 @@ Goal: an agent that writes missing API tests, runs them and fixes problems.
               It reads the existing typed clients and a similar spec first,
               writes the tests with the fixtures and tags, runs them, and checks the result.
               If a test fails it decides whether the test or the product is wrong and fixes the right one.
-              Never weaken an assertion. Summarise what it added and changed.
+              Tag every new test @api. Never weaken an assertion. Summarise what it added and changed.
+              Save it in this folder's .github/agents, not the repo root.
               Name it `api-test-writer`
 ```
 
-- Open `.github/agents/api-test-writer.agent.md` and review it.
+- If Copilot asks where to create it, choose **Workspace**.
+- Open `.github/agents/api-test-writer.agent.md` and review it. It should be listed under Customizations > Agents.
 
 **Execute:**
 
-- In the agent selector (bottom of Chat), choose `api-test-writer`.
+- In the agent selector (bottom of Chat), choose `api-test-writer`, and check its name is shown before you send.
 - Type:
 
 ```text
@@ -201,7 +212,8 @@ cover the flights search API
 
 **Verify:**
 
-- A new spec appears under `tests/api/` using the fixtures, with tags.
+- A new spec appears under `tests/api/` using the fixtures, tagged `@api`.
+- Look at the assertions. Are any too tightly tied to the current data, for example a whole list copied into `toEqual`? Discuss.
 - The agent ran the tests itself and reported the result.
 - Click **Keep**, then run `npm run api`. All API tests should pass. (`npm test` still shows the two TC1 UI tests failing. That is expected: they are the optional stretch.)
 
@@ -229,6 +241,7 @@ More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/custo
              scan the edited file and report any waitForTimeout or any test without a tag.
              Return the result as a systemMessage: ✅ if clean, ⚠️ with a plain list otherwise.
              Do not modify files. Support Windows and Unix paths.
+             Save it in this folder's .github/hooks, not the repo root.
              Read the file path from payload.tool_input.filePath, with the TOOL_INPUT_FILE_PATH
              environment variable as a fallback.
 ```
@@ -281,6 +294,8 @@ The customization files you created live in `.github/`, which git ignores. To re
 ## Troubleshooting
 
 - Slash commands not showing: ensure Copilot Chat is active and type `/`.
+- A file you created is not picked up: it probably landed in the repo-root `.github`. Move it into this folder's `.github` (see **Where your files go**).
+- Copilot reports `Denied by preToolUse hook`: a hook from another plugin or extension on your machine is failing and blocking Copilot's edits and commands. Disable or uninstall that plugin, reload VS Code, and try again.
 - `/create-…` not available: make sure you're in **Agent** mode.
 - Tests fail to start: confirm `npm run smoke` passes.
 - Port in use: set `PORT` and `BASE_URL` in `.env`.
