@@ -37,7 +37,7 @@ You are done when you can demonstrate each of these:
 
 After you run a prompt or slash command, **watch Copilot's reasoning in Chat and wait for it to finish** before moving on. If your result differs from what is described, ask Copilot to explain, or ask the trainer.
 
-**Start every chat as a Local chat.** In the Chat panel, make sure the chip at the bottom left of the chat box says **Local** (not **Copilot** or **Cloud**). See the picture in [PRE-WORK.md](PRE-WORK.md). Copilot sessions work from the repository root, create files in the wrong `.github` folder, and do not run this folder's hooks.
+**Start every chat as a Local chat, and check before you send each prompt.** In the Chat panel, make sure the chip at the bottom left of the chat box says **Local** (not **Copilot** or **Cloud**). A new chat can default back to **Copilot**. See the picture in [PRE-WORK.md](PRE-WORK.md). Copilot sessions work from the repository root, create files in the wrong `.github` folder, and do not run this folder's hooks.
 
 **Where your files go.** Everything you create with `/create-…` must end up inside **this folder's** `.github/` (for example `.github/prompts/…`). Copilot sometimes creates the file in the `.github` folder at the repository root instead. If that happens, move the file into this folder's `.github`, in the same subfolder. Otherwise Copilot will not load it. To check, open the cog wheel menu in the Chat panel, choose **Customizations**, and look for your item under **Workspace**.
 
@@ -252,9 +252,9 @@ More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/custo
 ```
 
 - **Quit VS Code completely and reopen it.** Reload Window is not enough, or the hook won't fire. Reopen this folder.
-- Start a new **Local** chat and ask: `In tests/api/tc2-create-booking.spec.ts, add a test with no tag that checks GET /api/health returns 200`.
-- Expect a hook warning in Chat ("received a warning"). Expand it: it should list the untagged test.
-- Nothing appears? Open the **Output** panel and choose **GitHub Copilot Chat Hooks** from the dropdown. It shows every hook run and what Copilot sent it.
+- Start a new **Local** chat and ask: `In tests/api/tc2-create-booking.spec.ts, add a test with no tag that checks GET /api/health returns 200`. (If that test already exists, ask for a variable rename instead. Any edit to the spec triggers the hook.)
+- Open the **Output** panel and choose **GitHub Copilot Chat Hooks** from the dropdown. After the edit you should see a `[PostToolUse]` entry that runs `spec-quality`, followed by its output, for example `⚠️ spec-quality … test without a tag`. **This is how you verify the hook ran.**
+- Depending on your VS Code version, Chat may also show a "received a warning" row. If it does not, that is fine: the Output channel is the reliable check.
 
 ## 6. Playwright MCP (trainer demo)
 
@@ -263,8 +263,12 @@ More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/custo
 To try it yourself, copy [optional/mcp.json](optional/mcp.json) to `.vscode/mcp.json`, start the server from the file's **Start** link, then ask the agent:
 
 ```text
-Open http://localhost:3100, search flights from SYD to MEL, and tell me what you see.
+Use only the Playwright MCP tools (no other browser). Open http://localhost:3100, search flights from SYD to MEL, and tell me what you see.
 ```
+
+- A browser window opens on your laptop. That is the MCP server, a local process, driving a real browser.
+- In Chat the tool calls appear as titles such as **Navigate to a URL**, **Page snapshot** and **Click**. Their raw names (`browser_navigate`, `browser_snapshot`, `browser_click`) are listed under Customizations > Tools.
+- To see the server itself, open the Command Palette, run **MCP: List Servers**, choose `playwright`, then **Show Output**.
 
 Use only the local demo app. Never point it at real sites or production.
 
