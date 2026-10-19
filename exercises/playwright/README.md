@@ -248,6 +248,7 @@ More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/custo
              Find the edited file in tool_input.filePath. For the apply_patch tool there is no
              filePath: read the paths from the patch text in tool_input.input, on the lines that
              start with "*** Update File:" or "*** Add File:".
+             Use only Node built-ins. Do not add or change any dependencies. Keep it short.
 ```
 
 - **Quit VS Code completely and reopen it.** Reload Window is not enough, or the hook won't fire. Reopen this folder.
