@@ -260,7 +260,12 @@ More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/custo
 
 *MCP lets the agent use tools. The Playwright MCP server lets it drive a real browser.* The trainer demonstrates this on screen. Playwright MCP runs **locally**: VS Code starts it as a process on your machine and talks to it directly, with no server hosted anywhere.
 
-To try it yourself, copy [optional/mcp.json](optional/mcp.json) to `.vscode/mcp.json`, start the server from the file's **Start** link, then ask the agent:
+To try it yourself:
+
+1. **Start the demo app** in a terminal and leave it running: `npm start`. (The tests start the app for you, but the MCP browser does not.)
+2. Copy [optional/mcp.json](optional/mcp.json) to `.vscode/mcp.json`.
+3. Start the server from the file's **Start** link.
+4. Ask the agent:
 
 ```text
 Use only the Playwright MCP tools (no other browser). Open http://localhost:3100, search flights from SYD to MEL, and tell me what you see.
@@ -335,7 +340,7 @@ The customization files you created live in `.github/`, which git ignores. To re
 - Copilot reports `Denied by preToolUse hook`: a hook from another plugin or extension on your machine is failing and blocking Copilot's edits and commands. Disable or uninstall that plugin, reload VS Code, and try again.
 - `/create-…` not available: make sure you're in **Agent** mode.
 - Tests fail to start: confirm `npm run smoke` passes.
-- Port in use: set `PORT` and `BASE_URL` in `.env`.
+- Port 3100 is in use: stop the program using it (the demo app and the tests both use 3100), then try again.
 
 ## Useful commands
 

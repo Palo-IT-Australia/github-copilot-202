@@ -45,7 +45,7 @@ The hands-on session is 45 minutes and has no time for installs. Do all of this 
 |---|---|
 | `npm ci` fails behind a proxy | Ask IT for the npm registry setting, or contact the trainer |
 | Browser download blocked | Contact the trainer before the session for an alternative |
-| Port 3100 is in use | Stop what is using it, or set `PORT` and `BASE_URL` in a `.env` file |
+| Port 3100 is in use | Stop the program using it (the demo app and the tests both use port 3100), then try again |
 | Copilot says `Denied by preToolUse hook` | A hook from another plugin on your machine is failing. Disable or uninstall that plugin, reload VS Code, and try again |
 | Copilot Chat does not reply | Sign in to GitHub from the VS Code account menu and check your Copilot subscription |
 
