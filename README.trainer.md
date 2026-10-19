@@ -5,6 +5,7 @@ This guide is for workshop trainers to quickly orient and facilitate sessions.
 
 ## Language Tracks (Quick Overview)
 - JavaScript: cart and checkout flow, with tests in [exercises/javascript/README.md](exercises/javascript/README.md).
+- Playwright (QE cohorts): Skyline Air flight search and booking API with Playwright tests, in [exercises/playwright/README.md](exercises/playwright/README.md). Trainer guide: [exercises/playwright/README.trainer.md](exercises/playwright/README.trainer.md).
 
 **Note: Typescript and Python excercises are current in development and might not be correct**
 - TypeScript: typed user service and validation logic in [exercises/typescript/README.md](exercises/typescript/README.md).

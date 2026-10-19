@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; margin: 0; color: #1f2933; }
+header { background: #b3001b; color: #fff; padding: 16px 24px; }
+header h1 { margin: 0; }
+header p { margin: 4px 0 0; font-size: 13px; opacity: .9; }
+main { max-width: 720px; margin: 24px auto; padding: 0 16px; }
+form { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+select, input, button { font-size: 15px; padding: 6px 10px; }
+ul { list-style: none; padding: 0; }
+li.flight-card { display: flex; gap: 12px; align-items: center; padding: 10px 12px; margin: 8px 0; border: 1px solid #d0d5dd; border-radius: 6px; }
+li.flight-card button { margin-left: auto; }
+#booking-error { color: #b3001b; }

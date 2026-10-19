@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@0.0.83",
+        "--isolated",
+        "--allowed-origins",
+        "http://localhost:3100"
+      ]
+    }
+  }
+}

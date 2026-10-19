@@ -1,0 +1,13 @@
+diff --git a/app/server.js b/app/server.js
+index 85ecf06..129f508 100644
+--- a/app/server.js
++++ b/app/server.js
+@@ -43,7 +43,7 @@ app.post('/api/bookings', (req, res) => {
+     flightId: flight.id,
+     passengerName: passengerName.trim(),
+     status: 'CONFIRMED',
+-    totalAud: flight.priceAud + flight.taxAud,
++    totalAud: flight.priceAud + Number(flight.taxAud),
+   };
+   bookings.push(booking);
+   res.status(201).json(booking);

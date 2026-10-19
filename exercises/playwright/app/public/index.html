@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skyline Air - Flight Finder</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header><h1>Skyline Air</h1><p>Fictional demo airline for training use</p></header>
+  <main>
+    <section aria-labelledby="search-heading">
+      <h2 id="search-heading">Find a flight</h2>
+      <form id="search-form">
+        <label for="from">From</label>
+        <select id="from" name="from">
+          <option value="SYD">Sydney (SYD)</option>
+          <option value="MEL">Melbourne (MEL)</option>
+          <option value="BNE">Brisbane (BNE)</option>
+        </select>
+        <label for="to">To</label>
+        <select id="to" name="to">
+          <option value="MEL">Melbourne (MEL)</option>
+          <option value="SYD">Sydney (SYD)</option>
+          <option value="BNE">Brisbane (BNE)</option>
+          <option value="PER">Perth (PER)</option>
+        </select>
+        <button type="submit" data-testid="search-submit">Search flights</button>
+      </form>
+    </section>
+
+    <section aria-live="polite">
+      <p id="no-results" data-testid="no-results" hidden>No flights found for this route.</p>
+      <ul id="flight-list" data-testid="flight-list"></ul>
+    </section>
+
+    <section id="booking-panel" hidden aria-labelledby="booking-heading">
+      <h2 id="booking-heading">Book flight <span id="booking-flight"></span></h2>
+      <form id="booking-form">
+        <label for="passenger">Passenger name</label>
+        <input id="passenger" name="passenger" type="text" />
+        <button type="submit">Confirm booking</button>
+      </form>
+      <p id="booking-confirmation" data-testid="booking-confirmation" hidden></p>
+      <p id="booking-error" role="alert" hidden></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

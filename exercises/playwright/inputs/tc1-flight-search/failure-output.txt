@@ -1,0 +1,57 @@
+
+Running 2 tests using 2 workers
+
+  x  2 [chromium] › tests\e2e\tc1-flight-search.spec.ts:8:7 › Flight search › shows matching flights for a served route @tc1 @ui (15.3s)
+  x  1 [chromium] › tests\e2e\tc1-flight-search.spec.ts:15:7 › Flight search › shows a message when no flights serve the route @tc1 @ui (15.4s)
+
+  1) [chromium] › tests\e2e\tc1-flight-search.spec.ts:8:7 › Flight search › shows matching flights for a served route @tc1 @ui 
+
+    Test timeout of 15000ms exceeded.
+
+    Error: locator.click: Test timeout of 15000ms exceeded.
+    Call log:
+      - waiting for locator('#search-btn')
+
+       at pages\flight-search.page.ts:27
+
+      25 |     await this.fromSelect.selectOption(from);
+      26 |     await this.toSelect.selectOption(to);
+    > 27 |     await this.searchButton.click();
+         |                             ^
+      28 |   }
+      29 | }
+      30 |
+        at FlightSearchPage.search (<repo>\tests\pages\flight-search.page.ts:27:29)
+        at <repo>\tests\e2e\tc1-flight-search.spec.ts:9:5
+
+    test-results\e2e-tc1-flight-search-Flig-025f6--flights-for-a-served-route-chromium\test-failed-1.png
+
+
+
+  2) [chromium] › tests\e2e\tc1-flight-search.spec.ts:15:7 › Flight search › shows a message when no flights serve the route @tc1 @ui 
+
+    Test timeout of 15000ms exceeded.
+
+    Error: locator.click: Test timeout of 15000ms exceeded.
+    Call log:
+      - waiting for locator('#search-btn')
+
+       at pages\flight-search.page.ts:27
+
+      25 |     await this.fromSelect.selectOption(from);
+      26 |     await this.toSelect.selectOption(to);
+    > 27 |     await this.searchButton.click();
+         |                             ^
+      28 |   }
+      29 | }
+      30 |
+        at FlightSearchPage.search (<repo>\tests\pages\flight-search.page.ts:27:29)
+        at <repo>\tests\e2e\tc1-flight-search.spec.ts:16:5
+
+    test-results\e2e-tc1-flight-search-Flig-7709e--no-flights-serve-the-route-chromium\test-failed-1.png
+
+
+
+  2 failed
+    [chromium] › tests\e2e\tc1-flight-search.spec.ts:8:7 › Flight search › shows matching flights for a served route @tc1 @ui 
+    [chromium] › tests\e2e\tc1-flight-search.spec.ts:15:7 › Flight search › shows a message when no flights serve the route @tc1 @ui 
