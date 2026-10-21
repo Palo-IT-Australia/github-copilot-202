@@ -37,7 +37,7 @@ The hands-on session is 45 minutes and has no time for installs. Do all of this 
 
 - `npm run smoke` shows `2 passed`
 - Copilot Chat replies in Agent mode, and the session type chip says **Local**
-- The Explorer root shows `app`, `tests` and `package.json` (you opened the `exercises/playwright` folder)
+- The Explorer root shows exercises/playwright folder with `app`, `tests` and `package.json`
 
 ## Problems?
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This lab teaches the core GitHub Copilot customization concepts in VS Code, using a Playwright test project as the playground:
+This track teaches the core GitHub Copilot customization concepts in VS Code, using a Playwright test project as the playground:
 
 - instructions
 - prompts
@@ -11,9 +11,9 @@ This lab teaches the core GitHub Copilot customization concepts in VS Code, usin
 
 (Hooks and the Playwright MCP server are optional extras.)
 
-The app is **Skyline Air**, a small fictional flight-search site with a booking API. It runs on your machine, and all data is synthetic. The Playwright part is only there to make the concepts relevant to your work. **The learning goal is the Copilot primitives.**
+The training app is **Skyline Air**, a small fictional flight-search site with a booking API. It runs on your machine, and all data is synthetic. The Playwright part is only there to make the concepts relevant to your work. **The learning goal is the Copilot primitives.**
 
-Time: **45 minutes.** Complete [PRE-WORK.md](PRE-WORK.md) first, because there is no time for setup in the session. Open the `exercises/playwright` folder in VS Code (File > Open Folder) so everything Copilot creates lands in this exercise.
+Time: **45 minutes.** Complete [PRE-WORK.md](PRE-WORK.md) first, because there is no time for setup in the session. Open the `exercises/playwright` folder in VS Code (File &gt; Open Folder) so everything Copilot creates lands in this exercise.
 
 ## Completion criteria
 
@@ -26,14 +26,16 @@ You are done when you can demonstrate each of these:
 
 ## Concepts
 
-| # | Concept | What it does | Command |
-|---|---|---|---|
-| 1 | Instructions | Always-on guidance for Copilot | `/create-instructions` |
-| 2 | Prompts | Reusable templates for repeated requests | `/create-prompt` |
-| 3 | Skills | Reusable multi-step workflows | `/create-skill` |
-| 4 | Agents | End-to-end tasks: write, run, fix | `/create-agent` |
-| 5 (optional) | Hooks | Automatic checks after tool actions | `/create-hook` |
-| 6 (optional) | MCP | Lets the agent drive a real browser | trainer demo |
+
+| #            | Concept      | What it does                             | Command                |
+| ------------ | ------------ | ---------------------------------------- | ---------------------- |
+| 1            | Instructions | Always-on guidance for Copilot           | `/create-instructions` |
+| 2            | Prompts      | Reusable templates for repeated requests | `/create-prompt`       |
+| 3            | Skills       | Reusable multi-step workflows            | `/create-skill`        |
+| 4            | Agents       | End-to-end tasks: write, run, fix        | `/create-agent`        |
+| 5 (optional) | Hooks        | Automatic checks after tool actions      | `/create-hook`         |
+| 6 (optional) | MCP          | Lets the agent drive a real browser      | trainer demo           |
+
 
 After you run a prompt or slash command, **watch Copilot's reasoning in Chat and wait for it to finish** before moving on. If your result differs from what is described, ask Copilot to explain, or ask the trainer.
 
@@ -77,7 +79,7 @@ Goal: Copilot always follows our Playwright team standards.
 ```
 
 - Press Enter. If Copilot asks a clarifying question, answer briefly (for example "any tags, at least one") and let it finish.
-- Open `.github/instructions/qe-playwright-rules.instructions.md` and review it. It should be listed under **Workspace** in Customizations > Instructions.
+- Open `.github/instructions/qe-playwright-rules.instructions.md` and review it. It should be listed under **Workspace** in Customizations &gt; Instructions.
 - Check it applies only to TypeScript via `applyTo: "**/*.ts"` (visible in the editor, not in Markdown preview).
 
 **Execute:**
@@ -97,7 +99,11 @@ a blank passenger name (only spaces), and an unknown flight
   - it uses `bookingsApi` (not `fetch` or a raw request)
   - every test has a tag
   - it asserts the status code and the error body (`400` for the blank name, `404` for the unknown flight)
-- Click **Keep**, then run `npx playwright test tests/api/booking-validation.spec.ts`. The new tests should pass.
+- Click **Keep**, then run 
+  ```text 
+  npx playwright test tests/api/booking-validation.spec.ts
+  ``` 
+  The new tests should pass.
 - Copilot may offer to fix the failing booking-total test (TC2). **Decline for now.** That is Concept 2.
 
 ---
@@ -161,11 +167,11 @@ Goal: a reusable review of API specs against team standards.
 ```
 
 - If Copilot asks where to create it, choose **Workspace**.
-- Open `.github/skills/api-test-review/SKILL.md` and review it. It should be listed under Customizations > Skills.
+- Open `.github/skills/api-test-review/SKILL.md` and review it. It should be listed under Customizations &gt; Skills.
 
 **Execute:**
 
-Close other spec files first, then type:
+Close other spec files first, in a **new chat**, type:
 
 ```text
 Review tests/api/tc2-create-booking.spec.ts
@@ -177,7 +183,7 @@ Review tests/api/tc2-create-booking.spec.ts
 
 - The response groups findings into pass and fail.
 - It names specific lines in the spec.
-- Check for the expandable "Reviewed" section showing the skill was used.
+- Check for the expandable "Reviewed" section in the chat history showing the skill was used.
 
 ---
 
@@ -201,7 +207,7 @@ Goal: an agent that writes missing API tests, runs them and fixes problems.
 ```
 
 - If Copilot asks where to create it, choose **Workspace**.
-- Open `.github/agents/api-test-writer.agent.md` and review it. It should be listed under Customizations > Agents.
+- Open `.github/agents/api-test-writer.agent.md` and review it. It should be listed under Customizations &gt; Agents.
 
 **Execute:**
 
@@ -264,7 +270,7 @@ To try it yourself:
 
 1. **Start the demo app** in a terminal and leave it running: `npm start`. (The tests start the app for you, but the MCP browser does not.)
 2. Copy [optional/mcp.json](optional/mcp.json) to `.vscode/mcp.json`.
-3. Start the server from the file's **Start** link.
+3. Start the server from the file's **Start** link.  (You may need to restart VS Code if not available.  Close and reopen VS Code to the same playwright folder)
 4. Ask the agent:
 
 ```text
@@ -272,7 +278,7 @@ Use only the Playwright MCP tools (no other browser). Open http://localhost:3100
 ```
 
 - A browser window opens on your laptop. That is the MCP server, a local process, driving a real browser.
-- In Chat the tool calls appear as titles such as **Navigate to a URL**, **Page snapshot** and **Click**. Their raw names (`browser_navigate`, `browser_snapshot`, `browser_click`) are listed under Customizations > Tools.
+- In Chat the tool calls appear as titles such as **Navigate to a URL**, **Page snapshot** and **Click**. Their raw names (`browser_navigate`, `browser_snapshot`, `browser_click`) are listed under Customizations &gt; Tools.
 - To see the server itself, open the Command Palette, run **MCP: List Servers**, choose `playwright`, then **Show Output**.
 
 Use only the local demo app. Never point it at real sites or production.
@@ -298,6 +304,7 @@ npm run report
 ```
 
 The HTML report opens. Open the failed test and look at:
+
 - the **error**: `waiting for locator('#search-btn')`
 - the **screenshot** of the page at the moment of failure
 - the **trace**: click through the actions. It shows each step, the page at that moment, and the click that never found its target.
@@ -335,7 +342,7 @@ The customization files you created live in `.github/`, which git ignores. To re
 ## Troubleshooting
 
 - Slash commands not showing: ensure Copilot Chat is active and type `/`.
-- A hook does not run: use a **Local** chat, quit and reopen VS Code after creating the hook, and check **Output > GitHub Copilot Chat Hooks**.
+- A hook does not run: use a **Local** chat, quit and reopen VS Code after creating the hook, and check **Output &gt; GitHub Copilot Chat Hooks**.
 - A file you created is not picked up: it probably landed in the repo-root `.github`. Move it into this folder's `.github` (see **Where your files go**).
 - Copilot reports `Denied by preToolUse hook`: a hook from another plugin or extension on your machine is failing and blocking Copilot's edits and commands. Disable or uninstall that plugin, reload VS Code, and try again.
 - `/create-…` not available: make sure you're in **Agent** mode.
@@ -344,11 +351,14 @@ The customization files you created live in `.github/`, which git ignores. To re
 
 ## Useful commands
 
-| Command | What it does |
-|---|---|
-| `npm run smoke` | Environment check |
-| `npm run tc1` / `npm run tc2` | Run one test case |
-| `npm run api` | Run all API tests |
-| `npm test` | Run everything |
-| `npm run report` | Open the HTML report |
-| `npm start` | Run the app at http://localhost:3100 |
+
+| Command                       | What it does                                                  |
+| ----------------------------- | ------------------------------------------------------------- |
+| `npm run smoke`               | Environment check                                             |
+| `npm run tc1` / `npm run tc2` | Run one test case                                             |
+| `npm run api`                 | Run all API tests                                             |
+| `npm test`                    | Run everything                                                |
+| `npm run report`              | Open the HTML report                                          |
+| `npm start`                   | Run the app at [http://localhost:3100](http://localhost:3100) |
+
+
