@@ -33,13 +33,11 @@ You are done when you can demonstrate each of these:
 | 2            | Prompts      | Reusable templates for repeated requests | `/create-prompt`       |
 | 3            | Skills       | Reusable multi-step workflows            | `/create-skill`        |
 | 4            | Agents       | End-to-end tasks: write, run, fix        | `/create-agent`        |
-| 5 (optional) | Hooks        | Automatic checks after tool actions      | `/create-hook`         |
-| 6 (optional) | MCP          | Lets the agent drive a real browser      | trainer demo           |
+| 5 (optional) | MCP          | Lets the agent drive a real browser      | trainer demo           |
+| 6 (optional) | Hooks        | Automatic checks after tool actions      | `/create-hook`         |
 
 
 After you run a prompt or slash command, **watch Copilot's reasoning in Chat and wait for it to finish** before moving on. If your result differs from what is described, ask Copilot to explain, or ask the trainer.
-
-**Start every chat as a Local chat, and check before you send each prompt.** In the Chat panel, make sure the chip at the bottom left of the chat box says **Local** (not **Copilot** or **Cloud**). A new chat can default back to **Copilot**. See the picture in [PRE-WORK.md](PRE-WORK.md). Copilot sessions work from the repository root, create files in the wrong `.github` folder, and do not run this folder's hooks.
 
 **Where your files go.** Everything you create with `/create-…` must end up inside **this folder's** `.github/` (for example `.github/prompts/…`). Copilot sometimes creates the file in the `.github` folder at the repository root instead. If that happens, move the file into this folder's `.github`, in the same subfolder. Otherwise Copilot will not load it. To check, open the cog wheel menu in the Chat panel, choose **Customizations**, and look for your item under **Workspace**.
 
@@ -239,30 +237,7 @@ Discuss with your group:
 
 # Optional extras
 
-## 5. Hook (optional)
-
-*Hooks run a command automatically at a point in an agent session.*
-More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/customization/hooks)
-
-```text
-/create-hook Post-tool hook named spec-quality: after edits to .spec.ts files only,
-             scan the edited file and report any waitForTimeout or any test without a tag.
-             Return the result as a systemMessage: ✅ if clean, ⚠️ with a plain list otherwise.
-             Do not modify files. Support Windows and Unix paths.
-             Save it in this folder's .github/hooks, not the repo root.
-             The hook gets a JSON payload on stdin with tool_name and tool_input.
-             Find the edited file in tool_input.filePath. For the apply_patch tool there is no
-             filePath: read the paths from the patch text in tool_input.input, on the lines that
-             start with "*** Update File:" or "*** Add File:".
-             Use only Node built-ins. Do not add or change any dependencies. Keep it short.
-```
-
-- **Quit VS Code completely and reopen it.** Reload Window is not enough, or the hook won't fire. Reopen this folder.
-- Start a new **Local** chat and ask: `In tests/api/tc2-create-booking.spec.ts, add a test with no tag that checks GET /api/health returns 200`. (If that test already exists, ask for a variable rename instead. Any edit to the spec triggers the hook.)
-- Open the **Output** panel and choose **GitHub Copilot Chat Hooks** from the dropdown. After the edit you should see a `[PostToolUse]` entry that runs `spec-quality`, followed by its output, for example `⚠️ spec-quality … test without a tag`. **This is how you verify the hook ran.**
-- Depending on your VS Code version, Chat may also show a "received a warning" row. If it does not, that is fine: the Output channel is the reliable check.
-
-## 6. Playwright MCP (trainer demo)
+## 5. Playwright MCP (trainer demo)
 
 *MCP lets the agent use tools. The Playwright MCP server lets it drive a real browser.* The trainer demonstrates this on screen. Playwright MCP runs **locally**: VS Code starts it as a process on your machine and talks to it directly, with no server hosted anywhere.
 
@@ -270,7 +245,7 @@ To try it yourself:
 
 1. **Start the demo app** in a terminal and leave it running: `npm start`. (The tests start the app for you, but the MCP browser does not.)
 2. Copy [optional/mcp.json](optional/mcp.json) to `.vscode/mcp.json`.
-3. Start the server from the file's **Start** link.  (You may need to restart VS Code if not available.  Close and reopen VS Code to the same playwright folder)
+3. Start the server from the file's **Start** link. If the **Start** link isn't there, close and reopen VS Code on the same `playwright` folder, then look again.
 4. Ask the agent:
 
 ```text
@@ -321,6 +296,33 @@ Also open `test-results/<failed test folder>/error-context.md`. Playwright write
 - **Where should the fix go?** Page object, spec or app?
 - Apply the fix, click **Keep**, and run `npm run tc1`. Copilot may find a second stale locator when it runs the tests and fix both. If not, fixing one locator can reveal another failure: go round again.
 - Review the result with your skill: `Review tests/e2e/tc1-flight-search.spec.ts`.
+
+## 6. Hook (optional)
+
+*Hooks run a command automatically at a point in an agent session.*
+More information: [Agent hooks](https://code.visualstudio.com/docs/copilot/customization/hooks)
+
+**Use a Local chat for this exercise.** Hooks only run in **Local** chats. Before you send each prompt, check that the chip at the bottom left of the chat box says **Local** (not **Copilot** or **Cloud**). If it says **Copilot** or **Cloud**, click it and choose **Local**.
+
+![Chat session type picker with Local selected](docs/images/chat-session-type.png)
+
+```text
+/create-hook Post-tool hook named spec-quality: after edits to .spec.ts files only,
+             scan the edited file and report any waitForTimeout or any test without a tag.
+             Return the result as a systemMessage: ✅ if clean, ⚠️ with a plain list otherwise.
+             Do not modify files. Support Windows and Unix paths.
+             Save it in this folder's .github/hooks, not the repo root.
+             The hook gets a JSON payload on stdin with tool_name and tool_input.
+             Find the edited file in tool_input.filePath. For the apply_patch tool there is no
+             filePath: read the paths from the patch text in tool_input.input, on the lines that
+             start with "*** Update File:" or "*** Add File:".
+             Use only Node built-ins. Do not add or change any dependencies. Keep it short.
+```
+
+- **Quit VS Code completely and reopen it.** Reload Window is not enough, or the hook won't fire. Reopen this folder.
+- Start a new **Local** chat and ask: `In tests/api/tc2-create-booking.spec.ts, add a test with no tag that checks GET /api/health returns 200`. (If that test already exists, ask for a variable rename instead. Any edit to the spec triggers the hook.)
+- Open the **Output** panel and choose **GitHub Copilot Chat Hooks** from the dropdown. After the edit you should see a `[PostToolUse]` entry that runs `spec-quality`, followed by its output, for example `⚠️ spec-quality … test without a tag`. **This is how you verify the hook ran.**
+- Depending on your VS Code version, Chat may also show a "received a warning" row. If it does not, that is fine: the Output channel is the reliable check.
 
 ---
 
