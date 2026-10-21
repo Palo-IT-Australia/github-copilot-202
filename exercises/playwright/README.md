@@ -258,6 +258,11 @@ Use only the Playwright MCP tools (no other browser). Open http://localhost:3100
 
 Use only the local demo app. Never point it at real sites or production.
 
+**When you have finished, stop the app.** Press `Ctrl+C` in the terminal where `npm start` is running. The tests reuse an app that is already running, so a leftover copy makes them run against old code. If you closed that terminal and port 3100 is still in use, stop whatever owns the port:
+
+- Windows (PowerShell): `Get-NetTCPConnection -LocalPort 3100 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess }`
+- macOS and Linux: `lsof -ti :3100 | xargs kill`
+
 ## Stretch: UI test case (TC1)
 
 Done early? Try the UI test case. You will see the failure with your own eyes first, then use **your own** prompt, skill and agent on it.
@@ -349,7 +354,7 @@ The customization files you created live in `.github/`, which git ignores. To re
 - Copilot reports `Denied by preToolUse hook`: a hook from another plugin or extension on your machine is failing and blocking Copilot's edits and commands. Disable or uninstall that plugin, reload VS Code, and try again.
 - `/create-…` not available: make sure you're in **Agent** mode.
 - Tests fail to start: confirm `npm run smoke` passes.
-- Port 3100 is in use: stop the program using it (the demo app and the tests both use 3100), then try again.
+- Port 3100 is in use: a copy of the demo app is probably still running (for example from `npm start`). Stop it with `Ctrl+C` in its terminal. If that terminal is gone, use the commands at the end of the Playwright MCP section.
 
 ## Useful commands
 
