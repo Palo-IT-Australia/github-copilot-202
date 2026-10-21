@@ -1,0 +1,5 @@
+{
+  "playwright.reuseBrowser": false,
+  "playwright.showTrace": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

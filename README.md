@@ -79,6 +79,7 @@ Choose one primary track based on familiarity with the language. Follow the inst
 - JavaScript track: [exercises/javascript/README.md](exercises/javascript/README.md)
 - TypeScript track: [exercises/typescript/README.md](exercises/typescript/README.md) ⚠ **Under construction — do not use**
 - Python track: [exercises/python/README.md](exercises/python/README.md) ⚠ **Under construction — do not use**
+- Playwright QE track (for QE cohorts): [exercises/playwright/README.md](exercises/playwright/README.md). Complete its [PRE-WORK.md](exercises/playwright/PRE-WORK.md) first.
 
 ---
 
