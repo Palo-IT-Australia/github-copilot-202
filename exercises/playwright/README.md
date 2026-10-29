@@ -41,6 +41,8 @@ After you run a prompt or slash command, **watch Copilot's reasoning in Chat and
 
 **Where your files go.** Everything you create with `/create-…` must end up inside **this folder's** `.github/` (for example `.github/prompts/…`). Copilot sometimes creates the file in the `.github` folder at the repository root instead. If that happens, move the file into this folder's `.github`, in the same subfolder. Otherwise Copilot will not load it. To check, open the cog wheel menu in the Chat panel, choose **Customizations**, and look for your item under **Workspace**.
 
+**Free the port between steps.** The demo app uses port 3100, and only one copy can use it. After every step where you run a test or an `npm` command, make sure it has finished and the terminal is back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) to release the port. This includes tests started from the Testing view or by Copilot, and `npm start`, `npm run tc1:ui` and `npm run report`, which never finish on their own. If the port is still in use, the next step fails with `is already used` or `EADDRINUSE`.
+
 ## Start (about 4 min)
 
 Run the API test case (TC2):
@@ -50,6 +52,8 @@ npm run tc2
 ```
 
 **Expected:** 1 test fails and 1 passes. The failing one is *"creates a confirmed booking with the correct total"*. Read the error. You will come back to it in Concept 2.
+
+**Free the port:** the terminal must be back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) before the next step.
 
 ---
 
@@ -102,6 +106,7 @@ a blank passenger name (only spaces), and an unknown flight
   npx playwright test tests/api/booking-validation.spec.ts
   ``` 
   The new tests should pass.
+- **Free the port:** the terminal must be back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) before the next step.
 - Copilot may offer to fix the failing booking-total test (TC2). **Decline for now.** That is Concept 2.
 
 ---
@@ -142,6 +147,7 @@ Goal: a repeatable way to triage any failing test.
 - The answer states a verdict and evidence.
 - It points at the app (`app/server.js`, the total calculation), not the test.
 - The prompt only diagnoses and does not change files. Send a follow-up message: `Apply the proposed fix`. Click **Keep**, then run `npm run tc2`. All the `@tc2` tests should now pass.
+- **Free the port:** the terminal must be back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) before the next step.
 
 ---
 
@@ -222,6 +228,7 @@ cover the flights search API
 - Look at the assertions. Are any too tightly tied to the current data, for example a whole list copied into `toEqual`? Discuss.
 - The agent ran the tests itself and reported the result.
 - Click **Keep**, then run `npm run api`. All API tests should pass. (`npm test` still shows the two TC1 UI tests failing. That is expected: they are the optional stretch.)
+- **Free the port:** the terminal must be back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) before the next step.
 
 ---
 
@@ -258,7 +265,7 @@ Use only the Playwright MCP tools (no other browser). Open http://localhost:3100
 
 Use only the local demo app. Never point it at real sites or production.
 
-**When you have finished, stop the app.** Press `Ctrl+C` in the terminal where `npm start` is running. The tests reuse an app that is already running, so a leftover copy makes them run against old code. If you closed that terminal and port 3100 is still in use, stop whatever owns the port:
+**When you have finished, stop the app.** Press `Ctrl+C` in the terminal where `npm start` is running. If it is left running, the next test run stops with `is already used`, because port 3100 is taken. If you closed that terminal and port 3100 is still in use, stop whatever owns the port:
 
 - Windows (PowerShell): `Get-NetTCPConnection -LocalPort 3100 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess }`
 - macOS and Linux: `lsof -ti :3100 | xargs kill`
@@ -275,7 +282,9 @@ npm run tc1:headed
 
 A browser window opens and runs the test in **slow motion**. Watch it load the Skyline Air page, pick Sydney, pick Melbourne, and then **stall**: it is waiting for a button it can't find, and about 15 seconds later the test times out and the window closes. The red error in the terminal is expected. Watch what the page shows and what the test is trying to click.
 
-(For a timeline you can scrub through instead, run `npm run tc1:ui` and click a test. Close the window when you are done. Or, in the Testing view, tick **Show browser** and run the test from there.)
+(For a timeline you can scrub through instead, run `npm run tc1:ui` and click a test. UI mode keeps running: close the window when you are done, then press `Ctrl+C` in the terminal. Or, in the Testing view, tick **Show browser** and run the test from there.)
+
+**Free the port:** the terminal must be back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) before the next step.
 
 **Step 2. Look at what Playwright captured:**
 
@@ -289,6 +298,8 @@ The HTML report opens. Open the failed test and look at:
 - the **screenshot** of the page at the moment of failure
 - the **trace**: click through the actions. It shows each step, the page at that moment, and the click that never found its target.
 
+The report keeps running in its terminal. When you have finished looking, press `Ctrl+C` to stop it.
+
 Also open `test-results/<failed test folder>/error-context.md`. Playwright writes it for you: the error plus a **snapshot of the page's real controls**. Look for the search button there. What is it actually called?
 
 **Step 3. Triage it with Copilot.** Attach that `error-context.md` file as context (the paperclip, or drag it into Chat), then:
@@ -300,6 +311,7 @@ Also open `test-results/<failed test folder>/error-context.md`. Playwright write
 - **Verdict:** is the test wrong, or the page? How does the evidence show it?
 - **Where should the fix go?** Page object, spec or app?
 - Apply the fix, click **Keep**, and run `npm run tc1`. Copilot may find a second stale locator when it runs the tests and fix both. If not, fixing one locator can reveal another failure: go round again.
+- **Free the port:** the terminal must be back at its prompt. If it is still running, press `Ctrl+C` (or close that terminal) before the next step.
 - Review the result with your skill: `Review tests/e2e/tc1-flight-search.spec.ts`.
 
 ## 6. Hook (optional)
@@ -354,18 +366,20 @@ The customization files you created live in `.github/`, which git ignores. To re
 - Copilot reports `Denied by preToolUse hook`: a hook from another plugin or extension on your machine is failing and blocking Copilot's edits and commands. Disable or uninstall that plugin, reload VS Code, and try again.
 - `/create-…` not available: make sure you're in **Agent** mode.
 - Tests fail to start: confirm `npm run smoke` passes.
-- Port 3100 is in use: a copy of the demo app is probably still running (for example from `npm start`). Stop it with `Ctrl+C` in its terminal. If that terminal is gone, use the commands at the end of the Playwright MCP section.
+- The next step fails with `http://localhost:3100/api/health is already used` (tests) or `EADDRINUSE: address already in use :::3100` (`npm start`): a copy of the demo app is still running, for example from `npm start`, `npm run tc1:ui`, or a test run started from the Testing view or by Copilot. Press `Ctrl+C` in its terminal, or close that terminal. If the terminal is gone, use the commands at the end of the Playwright MCP section.
 
 ## Useful commands
 
 
-| Command                       | What it does                                                  |
-| ----------------------------- | ------------------------------------------------------------- |
-| `npm run smoke`               | Environment check                                             |
-| `npm run tc1` / `npm run tc2` | Run one test case                                             |
-| `npm run api`                 | Run all API tests                                             |
-| `npm test`                    | Run everything                                                |
-| `npm run report`              | Open the HTML report                                          |
-| `npm start`                   | Run the app at [http://localhost:3100](http://localhost:3100) |
+| Command                       | What it does                                                  | Keeps running?                           |
+| ----------------------------- | ------------------------------------------------------------- | ---------------------------------------- |
+| `npm run smoke`               | Environment check                                             | No                                       |
+| `npm run tc1` / `npm run tc2` | Run one test case                                             | No                                       |
+| `npm run tc1:headed`          | Watch TC1 in slow motion                                      | No                                       |
+| `npm run tc1:ui`              | TC1 in UI mode                                                | **Yes**: close the window, then `Ctrl+C` |
+| `npm run api`                 | Run all API tests                                             | No                                       |
+| `npm test`                    | Run everything                                                | No                                       |
+| `npm run report`              | Open the HTML report                                          | **Yes**: `Ctrl+C` when done              |
+| `npm start`                   | Run the app at [http://localhost:3100](http://localhost:3100) | **Yes**: `Ctrl+C` when done              |
 
-
+"No" means the command ends by itself and releases the port.

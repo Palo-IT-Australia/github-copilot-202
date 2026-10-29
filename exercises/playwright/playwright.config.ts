@@ -16,11 +16,13 @@ export default defineConfig({
     launchOptions: { slowMo: Number(process.env.PW_SLOWMO ?? 0) },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
-  // Starts the Skyline Air demo app automatically; reuses it if already running.
+  // Starts the Skyline Air demo app for the test run and stops it afterwards.
+  // reuseExistingServer is false on purpose: if something is already using the port (for example a
+  // leftover `npm start`), the run stops with a clear message instead of silently testing old code.
   webServer: {
     command: 'node app/server.js',
     url: `${BASE_URL}/api/health`,
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     timeout: 30_000,
   },
 });
